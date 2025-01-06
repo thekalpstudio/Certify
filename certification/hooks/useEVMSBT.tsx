@@ -106,7 +106,7 @@ const useEVMSBTApi = () => {
             blockchain: "ETH",
             walletAddress: fixedWallet,
             args: {
-              owner,
+              tokenOwner: owner,
             },
           }),
         }

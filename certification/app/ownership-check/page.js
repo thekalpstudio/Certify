@@ -1,16 +1,31 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar2 from "../components/Navbar/Navbar2";
 import Certificate from "../components/Certificate/Certificate";
 import useSBTApi from "../../hooks/userSBT";
+import useEVMSBTApi from "@/hooks/useEVMSBT";
 
 export default function OwnershipChecker() {
   const { getSBTByOwner } = useSBTApi();
+  const { getSBTByOwner: getEVMSBTByOwner } = useEVMSBTApi();
   const [owner, setOwner] = useState("");
   const [tokenId, setTokenId] = useState("");
   const [ownership, setOwnership] = useState(null);
   const [error, setError] = useState("");
   const [formType, setFormType] = useState("owner"); // Default to the "owner" form
+  const [network, setNetwork] = useState("Holesky");
+
+  const FIXED_WALLET =
+    network === "Holesky"
+      ? process.env.NEXT_PUBLIC_HOLESKY_WALLET
+      : process.env.NEXT_PUBLIC_KALP_WALLET;
+
+  useEffect(() => {
+    const savedNetwork = localStorage.getItem("selectedNetwork");
+    if (savedNetwork) {
+      setNetwork(savedNetwork);
+    }
+  }, []);
 
   const handleCheck = async () => {
     setError("");
@@ -18,7 +33,11 @@ export default function OwnershipChecker() {
     try {
       let response;
       if (formType === "owner") {
-        response = await getSBTByOwner(owner);
+        if (network === "Holesky") {
+          response = await getEVMSBTByOwner(owner);
+        } else {
+          response = await getSBTByOwner(owner);
+        }
       } else if (formType === "owner-token") {
         response = await getSBTByOwner(owner, tokenId); // Assuming API supports both parameters
       }
@@ -27,15 +46,22 @@ export default function OwnershipChecker() {
         // Parse the metadata string into an object
         let parsedMetadata = {};
         try {
-          parsedMetadata = JSON.parse(response.result.result.metadata);
+          if (network === "Holesky") {
+            parsedMetadata = {
+              name: response.result.result[2][1],
+              dateOfIssue: response.result.result[2][3],
+            };
+          } else {
+            parsedMetadata = JSON.parse(response.result.result.metadata);
+          }
         } catch (parseError) {
-          setError("Failed to parse metadata.",parseError);
+          setError("Failed to parse metadata.", parseError);
           return;
         }
 
         setOwnership({
           owner: response.result.result.owner,
-          tokenID: response.result.result.tokenID,
+          tokenID: response.result.result[1], 
           metadata: parsedMetadata,
           timestamp: response.timestamp,
         });
@@ -43,7 +69,7 @@ export default function OwnershipChecker() {
         setError("No certificate found for this owner.");
       }
     } catch (err) {
-      setError("An error occurred while checking ownership.",err);
+      setError("An error occurred while checking ownership.", err);
     }
   };
 
@@ -113,12 +139,12 @@ export default function OwnershipChecker() {
         {/* Ownership Details */}
         {ownership && (
           <Certificate
-                    title="College Degree"
-                    name={ownership.metadata.name || "Your Name"}
-                    date={ownership.metadata.dateOfIssue || "Date"}
-                    hash={ownership.tokenID || "Recipient Address"}
-                    college={ownership.owner || "IEM"}
-                  />
+            title="College Degree"
+            name={ownership.metadata.name || "Your Name"}
+            date={ownership.metadata.dateOfIssue || "Date"}
+            hash={ownership.tokenID || "Recipient Address"}
+            college={ownership.owner || "IEM"}
+          />
         )}
       </main>
     </div>
