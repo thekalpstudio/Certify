@@ -5,6 +5,7 @@ import Certificate from "../components/Certificate/Certificate";
 import { Wallet, Lock } from "lucide-react";
 import useSBTApi from "@/hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
+import Link from "next/link";
 
 const MintSbt = () => {
   const { mintSBT } = useSBTApi();
@@ -14,10 +15,17 @@ const MintSbt = () => {
   const [organization, setOrganization] = useState("");
   const [dateOfIssue, setDateOfIssue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState({ status: "", message: "" });
+  const [result, setResult] = useState({ status: "", message: "", hash: "" });
   const [network, setNetwork] = useState("Holesky");
 
-  const FIXED_WALLET = network === "Holesky" ? process.env.NEXT_PUBLIC_HOLESKY_WALLET : process.env.NEXT_PUBLIC_KALP_WALLET;
+  const FIXED_WALLET =
+    network === "Holesky"
+      ? process.env.NEXT_PUBLIC_HOLESKY_WALLET
+      : process.env.NEXT_PUBLIC_KALP_WALLET;
+
+  const ExplorerLink = network === "Holesky"
+  ? "https://holesky.etherscan.io/tx/"
+  : "https://kalpscan.io/transactions?transactionId="
 
   useEffect(() => {
     const savedNetwork = localStorage.getItem("selectedNetwork");
@@ -31,35 +39,37 @@ const MintSbt = () => {
       setResult({
         status: "error",
         message: "All fields are required. Please fill in the form completely.",
+        hash: "",
       });
       return;
     }
 
     setLoading(true);
-    setResult({ status: "", message: "" });
+    setResult({ status: "", message: "", hash: "" });
+    let response;
 
     try {
       if (network === "Holesky") {
-        const response = await mintEVMSBT(
+        response = await mintEVMSBT(
           recipientAddress,
           userName,
           organization,
           dateOfIssue
         );
 
-        if (response.error) {
-          throw new Error(response.message || "Failed to mint certification.");
+        if (response.status == "FAILURE") {
+          throw new Error("Failed to mint certification.");
         }
-      }else{
-        const response = await mintSBT(
+      } else {
+        response = await mintSBT(
           recipientAddress,
           userName,
           organization,
           dateOfIssue
         );
-  
-        if (response.error) {
-          throw new Error(response.message || "Failed to mint certification.");
+
+        if (response.status == "FAILURE") {
+          throw new Error("Failed to mint certification.");
         }
       }
 
@@ -67,6 +77,7 @@ const MintSbt = () => {
         status: "success",
         message:
           "Certification SBT minted successfully! Your achievement is now permanently recorded on the blockchain.",
+        hash: response.result.transactionId,
       });
       setRecipientAddress("");
       setUserName("");
@@ -80,6 +91,7 @@ const MintSbt = () => {
           error instanceof Error
             ? error.message
             : "An unexpected error occurred. Please try again.",
+        hash: "",
       });
     } finally {
       setLoading(false);
@@ -224,6 +236,10 @@ const MintSbt = () => {
                   }`}
                 >
                   {result.message}
+                  {result.hash && <>
+                    <span className="text-black">Link to verify:</span><Link href={`${ExplorerLink}${result.hash}`} target="_blank"><span className="text-blue-600">Click here</span></Link>
+                  </>}
+                  
                 </p>
               </div>
             )}
