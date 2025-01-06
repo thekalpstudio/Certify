@@ -1,7 +1,7 @@
 "use client";
 const useSBTApi = () => {
-  const baseURL = "https://gateway-api.kalp.studio/v1/contract/kalp/";
-  const fixedWallet = "a2510d12c6502ba299c2b4b8c107771433b64429";
+  const baseURL = "https://gateway-api.kalp.studio/v1/contract/kalp";
+  const fixedWallet = "4694bc679e57ba241ae27ea5d3d72d00f12f1f34";
   const initialize = async (description: string) => {
     try {
       const response = await fetch(
