@@ -15,9 +15,9 @@ const MintSbt = () => {
   const [dateOfIssue, setDateOfIssue] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState({ status: "", message: "" });
-  const [network, setNetwork] = useState("Polygon");
+  const [network, setNetwork] = useState("Holesky");
 
-  const FIXED_WALLET = network === "Polygon" ? process.env.NEXT_PUBLIC_POLYGON_WALLET : process.env.NEXT_PUBLIC_KALP_WALLET;
+  const FIXED_WALLET = network === "Holesky" ? process.env.NEXT_PUBLIC_HOLESKY_WALLET : process.env.NEXT_PUBLIC_KALP_WALLET;
 
   useEffect(() => {
     const savedNetwork = localStorage.getItem("selectedNetwork");
@@ -39,7 +39,7 @@ const MintSbt = () => {
     setResult({ status: "", message: "" });
 
     try {
-      if (network === "Polygon") {
+      if (network === "Holesky") {
         const response = await mintEVMSBT(
           recipientAddress,
           userName,
