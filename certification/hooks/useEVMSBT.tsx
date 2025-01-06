@@ -2,12 +2,12 @@
 // Example API hook structure
 
 const useEVMSBTApi = () => {
-  const baseURL = "https://dev-ks-gatewayapi.p2eppl.com/v1/contract/evm";
-  const fixedWallet = "0xaCB11145EEE3dE2179B2853C9469A03344d550e4";
+  const baseURL = "https://gateway-api.kalp.studio/v1/contract/evm";
+  const fixedWallet = "0xB9d3B87caF142b08FfB9cb6606710Ac84E62fEBB";
   const initialize = async (description: string) => {
     try {
       const response = await fetch(
-        `${baseURL}/invoke/0xf709CBf25c18a40f6f860933EF48cae78bE48696/initialise`,
+        `${baseURL}/nvoke/0xc238Ed77b39DE77143223F242938AEb3fFeb5389/initialize`,
         {
           method: "POST",
           headers: {
@@ -15,8 +15,8 @@ const useEVMSBTApi = () => {
             "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
           },
           body: JSON.stringify({
-            network: "AMOY",
-            blockchain: "POLY",
+            network: "HOLESKY",
+            blockchain: "ETH",
             walletAddress: fixedWallet,
             args: {
               description,
@@ -38,7 +38,7 @@ const useEVMSBTApi = () => {
   ) => {
     try {
       const response = await fetch(
-        `${baseURL}/invoke/0xf709CBf25c18a40f6f860933EF48cae78bE48696/mint`,
+        `${baseURL}/invoke/0xc238Ed77b39DE77143223F242938AEb3fFeb5389/mintSBT`,
         {
           method: "POST",
           headers: {
@@ -46,8 +46,8 @@ const useEVMSBTApi = () => {
             "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
           },
           body: JSON.stringify({
-            network: "AMOY",
-            blockchain: "POLY",
+            network: "HOLESKY",
+            blockchain: "ETH",
             walletAddress: fixedWallet,
             args: {
               to: recipientAddress,
@@ -65,37 +65,10 @@ const useEVMSBTApi = () => {
     }
   };
 
-  // const querySBT = async (owner: string, tokenId: string) => {
-  //   try {
-  //     const response = await fetch(
-  //       `${baseURL}/query/4YmhL1C3IODKvk0UY7WBpHXKPr8GixYo1735807277656/QuerySBT`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
-  //         },
-  //         body: JSON.stringify({
-  //           network: "AMOY",
-  //           blockchain: "POLY",
-  //           walletAddress: fixedWallet,
-  //           args: {
-  //             owner,
-  //             tokenID: tokenId,
-  //           },
-  //         }),
-  //       }
-  //     );
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error("Error querying SBT:", error);
-  //   }
-  // };
-
-  const getSBTByOwner = async (owner: string) => {
+  const querySBT = async (owner: string, tokenId: string) => {
     try {
       const response = await fetch(
-        `${baseURL}/query/0xf709CBf25c18a40f6f860933EF48cae78bE48696/getTokenByOwner`,
+        `${baseURL}/query/0xc238Ed77b39DE77143223F242938AEb3fFeb5389/querySBT`,
         {
           method: "POST",
           headers: {
@@ -103,8 +76,35 @@ const useEVMSBTApi = () => {
             "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
           },
           body: JSON.stringify({
-            network: "AMOY",
+            network: "HOLESKY",
             blockchain: "POLY",
+            walletAddress: fixedWallet,
+            args: {
+              owner,
+              tokenID: tokenId,
+            },
+          }),
+        }
+      );
+      return await response.json();
+    } catch (error) {
+      console.error("Error querying SBT:", error);
+    }
+  };
+
+  const getSBTByOwner = async (owner: string) => {
+    try {
+      const response = await fetch(
+        `${baseURL}/query/0xc238Ed77b39DE77143223F242938AEb3fFeb5389/getSBTByOwner`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
+          },
+          body: JSON.stringify({
+            network: "HOLESKY",
+            blockchain: "ETH",
             walletAddress: fixedWallet,
             args: {
               owner,
@@ -118,33 +118,10 @@ const useEVMSBTApi = () => {
     }
   };
 
-  // const getAllTokenIDs = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `${baseURL}/query/4YmhL1C3IODKvk0UY7WBpHXKPr8GixYo1735807277656/GetAllTokenIDs`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
-  //         },
-  //         body: JSON.stringify({
-  //           network: "AMOY",
-  //           blockchain: "POLY",
-  //           walletAddress: fixedWallet,
-  //         }),
-  //       }
-  //     );
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error("Error getting all token IDs:", error);
-  //   }
-  // };
-
-  const attemptTransfer = async (from: string, to: string, tokenId: string) => {
+  const getAllTokenIDs = async () => {
     try {
       const response = await fetch(
-        `${baseURL}/kalp/query/4YmhL1C3IODKvk0UY7WBpHXKPr8GixYo1735807277656/TransferSBT`,
+        `${baseURL}/query/0xc238Ed77b39DE77143223F242938AEb3fFeb5389/getAllTokenIds`,
         {
           method: "POST",
           headers: {
@@ -152,8 +129,31 @@ const useEVMSBTApi = () => {
             "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
           },
           body: JSON.stringify({
-            network: "AMOY",
-            blockchain: "POLY",
+            network: "HOLESKY",
+            blockchain: "ETH",
+            walletAddress: fixedWallet,
+          }),
+        }
+      );
+      return await response.json();
+    } catch (error) {
+      console.error("Error getting all token IDs:", error);
+    }
+  };
+
+  const attemptTransfer = async (from: string, to: string, tokenId: string) => {
+    try {
+      const response = await fetch(
+        `${baseURL}/query/0xc238Ed77b39DE77143223F242938AEb3fFeb5389/transfer`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": process.env.NEXT_PUBLIC_API_KEY!,
+          },
+          body: JSON.stringify({
+            network: "HOLESKY",
+            blockchain: "ETH",
             walletAddress: fixedWallet,
             args: {
               from,
@@ -175,7 +175,9 @@ const useEVMSBTApi = () => {
   return {
     initialize,
     mintSBT,
+    querySBT,
     getSBTByOwner,
+    getAllTokenIDs,
     attemptTransfer,
   };
 };
