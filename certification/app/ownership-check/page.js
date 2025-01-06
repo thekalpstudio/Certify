@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Navbar2 from "../components/Navbar/Navbar2";
+import Certificate from "../components/Certificate/Certificate";
 import useSBTApi from "../../hooks/userSBT";
 
 export default function OwnershipChecker() {
@@ -49,8 +50,8 @@ export default function OwnershipChecker() {
   return (
     <div>
       <Navbar2 />
-      <main className="flex gap-12 justify-center min-h-screen bg-gradient-to-br items-center pb-48 from-gray-50 to-indigo-50">
-        <div className="w-full max-w-md bg-white py-4 px-6 rounded-xl shadow-lg">
+      <main className="flex gap-12 justify-center min-h-screen bg-gradient-to-br items-center from-gray-50 to-indigo-50">
+        <div className="w-full max-w-md bg-white ml-8 py-4 px-6 rounded-xl shadow-lg">
           <form className="space-y-2">
             {/* Owner Address Input */}
             <div>
@@ -111,75 +112,13 @@ export default function OwnershipChecker() {
 
         {/* Ownership Details */}
         {ownership && (
-          <div className="w-full max-w-3xl bg-white border-2 border-zinc-600 shadow-lg rounded-xl p-6 mt-8 relative">
-            {/* Certificate Title */}
-            <div className="text-center">
-              <h1 className="font-bold text-2xl md:text-4xl text-black">
-                Certificate
-              </h1>
-              <p className="text-lg md:text-xl text-black">of</p>
-            </div>
-
-            {/* Dynamic Title */}
-            <div className="text-center mt-4">
-              <h2 className="font-bold text-xl md:text-3xl text-black">
-              {ownership.metadata.description || "No description provided."}
-              </h2>
-              <hr className="mt-2 w-3/4 md:w-2/3 mx-auto border-t-2 border-black" />
-            </div>
-
-            {/* Awarded By */}
-            <div className="text-center mt-4">
-              <p className="text-md md:text-lg text-black">from</p>
-              <h3 className="font-bold text-lg md:text-2xl text-black mt-4">
-                {ownership.metadata.organization || "College Name"}
-              </h3>
-              <hr className="mt-2 w-4/5 md:w-3/4 mx-auto border-t-2 border-black" />
-            </div>
-
-            {/* Awarded To */}
-            <div className="text-center mt-4">
-              <p className="text-md md:text-lg text-black">awarded to</p>
-              <h3 className="font-bold text-lg md:text-2xl text-black mt-4">
-                {ownership.metadata.name || "Recipient Name"}
-              </h3>
-              <hr className="mt-2 w-4/5 md:w-3/4 mx-auto border-t-2 border-black" />
-            </div>
-      
-            {/* Date of Issue */}
-            <div className="text-center mt-4">
-              <p className="text-lg md:text-xl text-black">on</p>
-              <p className="text-md md:text-lg text-black mt-2">
-                {ownership.metadata.dateOfIssue || "Date of Issue"}
-              </p>
-              <hr className="mt-2 w-1/2 mx-auto border-t-2 border-black" />
-            </div>
-
-            {/* Unique Identifier */}
-            <div className="mt-6">
-              <div className="">
-                <p className="text-xs md:text-sm text-black">
-                  Token ID: {ownership.tokenID || "Unique Identifier"}
-                </p>
-              </div>
-
-              {/* Owner Address */}
-              <div className="">
-                <p className="text-xs md:text-sm text-black">
-                  Owner Wallet Address: {ownership.owner || "Owner Address"}
-                </p>
-              </div>
-            </div>
-
-            {/* Logo */}
-            <div className="absolute bottom-6 right-6 md:right-8">
-              <img
-                src="/logo.png"
-                alt="Logo"
-                className="h-12 w-20 md:h-20 md:w-32 object-contain"
-              />
-            </div>
-          </div>
+          <Certificate
+                    title="College Degree"
+                    name={ownership.metadata.name || "Your Name"}
+                    date={ownership.metadata.dateOfIssue || "Date"}
+                    hash={ownership.tokenID || "Recipient Address"}
+                    college={ownership.owner || "IEM"}
+                  />
         )}
       </main>
     </div>
