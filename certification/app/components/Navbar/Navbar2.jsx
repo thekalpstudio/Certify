@@ -4,7 +4,7 @@ import { Award } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Navbar2 = () => {
-  const [network, setNetwork] = useState("Polygon");
+  const [network, setNetwork] = useState("Holesky");
 
   useEffect(() => {
     const savedNetwork = localStorage.getItem("selectedNetwork");
@@ -14,7 +14,7 @@ const Navbar2 = () => {
   }, []);
 
   const toggleNetwork = () => {
-    const newNetwork = network === "Polygon" ? "KALP" : "Polygon";
+    const newNetwork = network === "Holesky" ? "KALP" : "Holesky";
     setNetwork(newNetwork);
     localStorage.setItem("selectedNetwork", newNetwork);
     window.location.reload();
@@ -63,10 +63,10 @@ const Navbar2 = () => {
             <div className="relative flex justify-between gap-6 w-full px-3">
               <span 
                 className={`transition-colors duration-300 ${
-                  network === "Polygon" ? "text-white" : "text-gray-500"
+                  network === "Holesky" ? "text-white" : "text-gray-500"
                 }`}
               >
-                Polygon
+                Holesky
               </span>
               <span 
                 className={`transition-colors duration-300 ${
