@@ -12,6 +12,7 @@ const MintSbt = () => {
   const { mintSBT: mintEVMSBT } = useEVMSBTApi();
   const [recipientAddress, setRecipientAddress] = useState("");
   const [userName, setUserName] = useState("");
+  const [userEmail, setEmail] = useState("");
   const [organization, setOrganization] = useState("");
   const [dateOfIssue, setDateOfIssue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -127,8 +128,8 @@ const MintSbt = () => {
                 type="text"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-black"
                 placeholder="Enter user email"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value={userEmail}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
