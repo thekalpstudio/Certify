@@ -77,7 +77,7 @@ const MintSbt = () => {
         status: "success",
         message:
           "Certification SBT minted successfully! Your achievement is now permanently recorded on the blockchain.",
-        hash: network === "Holesky" ? response.result.transactionHash : response.result.transactionId,
+        hash: network === "Holesky" ? response.result.result.transactionHash : response.result.transactionId,
       });
       setRecipientAddress("");
       setUserName("");
