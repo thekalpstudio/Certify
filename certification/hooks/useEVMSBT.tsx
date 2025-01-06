@@ -51,7 +51,6 @@ const useEVMSBTApi = () => {
             walletAddress: fixedWallet,
             args: {
               to: recipientAddress,
-              description : "string",
               name: user_name,
               organization: organization,
               dateOfIssue: date_of_issue,
