@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { Shield, Award, ExternalLink, Search, FileCheck } from "lucide-react";
+import { Shield, Award, ExternalLink, FileCheck } from "lucide-react";
 import Navbar from "../components/Navbar/Navbar2";
 
 const FeatureCard = ({ title, description, icon: Icon, options, path }) => {

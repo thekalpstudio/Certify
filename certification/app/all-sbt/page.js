@@ -56,6 +56,7 @@ export default function AllSBTs() {
         } else {
           setError("Failed to fetch SBT IDs.");
         }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("An error occurred while fetching SBT IDs.");
       } finally {

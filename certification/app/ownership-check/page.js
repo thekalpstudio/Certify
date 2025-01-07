@@ -15,11 +15,6 @@ export default function OwnershipChecker() {
   const [formType, setFormType] = useState("owner"); // Default to the "owner" form
   const [network, setNetwork] = useState("Holesky");
 
-  const FIXED_WALLET =
-    network === "Holesky"
-      ? process.env.NEXT_PUBLIC_HOLESKY_WALLET
-      : process.env.NEXT_PUBLIC_KALP_WALLET;
-
   useEffect(() => {
     const savedNetwork = localStorage.getItem("selectedNetwork");
     if (savedNetwork) {
