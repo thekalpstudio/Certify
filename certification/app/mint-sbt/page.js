@@ -5,6 +5,7 @@ import Certificate from "../components/Certificate/Certificate";
 import { Wallet, Lock } from "lucide-react";
 import useSBTApi from "@/hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
+import { sendNotification } from "@/lib/notification";
 import Link from "next/link";
 
 const MintSbt = () => {
@@ -34,6 +35,25 @@ const MintSbt = () => {
       setNetwork(savedNetwork);
     }
   }, []);
+
+const handleSendNotification = async (transactionHash) => {
+  try {
+    await sendNotification(
+    {
+      name: userName,
+      transactionHash: `${ExplorerLink}${transactionHash}`,
+      view_link: `${window.location.origin}/certificate/${network}/${recipientAddress}`,
+    },
+    {
+      userId: recipientAddress,
+      email: userEmail
+    }
+    );
+    console.log('Notification sent successfully');
+  } catch (error) {
+    console.error('Failed to send notification:', error);
+  }
+};
 
   const handleMint = async () => {
     if (!recipientAddress || !userName || !organization || !dateOfIssue) {
@@ -73,13 +93,15 @@ const MintSbt = () => {
           throw new Error("Failed to mint certification.");
         }
       }
-
+      const transactionHash = network === "Holesky" ? response.result.result.transactionHash : response.result.transactionId;
+      handleSendNotification(transactionHash);
       setResult({
         status: "success",
         message:
           "Certification SBT minted successfully! Your achievement is now permanently recorded on the blockchain.",
-        hash: network === "Holesky" ? response.result.result.transactionHash : response.result.transactionId,
+        hash: transactionHash,
       });
+
       setRecipientAddress("");
       setUserName("");
       setOrganization("");
