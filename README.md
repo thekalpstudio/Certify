@@ -54,8 +54,8 @@ This simulates real-world scenarios where organizations need to issue verifiable
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/thekalpstudio/Build_Hackathon.git
-cd Build_Hackathon
+git clone 
+cd 
 ```
 
 2. Navigate to smart contract directory:
