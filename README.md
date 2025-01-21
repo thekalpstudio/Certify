@@ -355,32 +355,32 @@ const mintSBT = async (recipientAddress: string) => {
    - Complete [API Testing Guide](https://doc.kalp.studio/Getting-started/Kalp-API-Overview/)
    - Implement comprehensive test suite
 
- Example:🔒 Interact with Smart Contract Using Postman
+ **Example:🔒 Interact with Smart Contract Using Postman**
 
-Prerequisites:
+*Prerequisites:*
 
 After executing the above setup:
 
-1. https://doc.kalp.studio/Getting-started/Onboarding/How-to-Sign-Up-and-Log-In-to-Kalp-Studio-Platform/
+1. [Sign-Up](https://doc.kalp.studio/Getting-started/Onboarding/How-to-Sign-Up-and-Log-In-to-Kalp-Studio-Platform/)
 
-2. https://doc.kalp.studio/Dev-documentation/Kalp-DLT/Smart-Contract-Write-Test-Deploy-Interact/Deploy-the-smart-contract/
+2. [Deploy-the-smart-contract](https://doc.kalp.studio/Dev-documentation/Kalp-DLT/Smart-Contract-Write-Test-Deploy-Interact/Deploy-the-smart-contract/)
 
-3. https://www.postman.com/downloads/
-
-
-After deploying the smart contract in Kalp Studio, an API endpoint will be generated. This API endpoint can be used to interact with the deployed smart contract.
-
-Here is an example of a generated API endpoint route in Kalp Studio:
-
-<img width="1698" alt="Screenshot 2025-01-21 at 2 45 09 PM" src="https://github.com/user-attachments/assets/04eff44f-5fc3-4948-a176-52f4c42dc872" />
+3. [postman](https://www.postman.com/downloads/)
 
 
-Click on Check Params, and the routing details and parameters should look like this:
+**After deploying the smart contract in Kalp Studio, an API endpoint will be generated. This API endpoint can be used to interact with the deployed smart contract.**
+
+- Here is an example of a generated API endpoint route in Kalp Studio:
+
+- <img width="1698" alt="Screenshot 2025-01-21 at 2 45 09 PM" src="https://github.com/user-attachments/assets/04eff44f-5fc3-4948-a176-52f4c42dc872" />
 
 
-<img width="1659" alt="Screenshot 2025-01-21 at 2 47 04 PM" src="https://github.com/user-attachments/assets/bdc12663-e732-4dde-b4fc-4fc3bc562a13" />
+**Click on Check Params, and the routing details and parameters should look like this:**
 
-An API key is required for authorization in API POST requests.
+
+- <img width="1659" alt="Screenshot 2025-01-21 at 2 47 04 PM" src="https://github.com/user-attachments/assets/bdc12663-e732-4dde-b4fc-4fc3bc562a13" />
+
+**An API key is required for authorization in API POST requests.**
 
 It looks like this in Kalp Studio:
 
@@ -388,8 +388,8 @@ It looks like this in Kalp Studio:
 <img width="1685" alt="Screenshot 2025-01-21 at 2 49 31 PM" src="https://github.com/user-attachments/assets/0200b831-9ffb-4d1b-9be7-079f1e05bd22" />
 
 
-Setting Headers in Postman:
-Set the required headers for authentication:
+**Setting Headers in Postman:**
+- Set the required headers for authentication:
 
 1. Key: x-api
 
