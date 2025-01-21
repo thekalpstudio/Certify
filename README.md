@@ -103,17 +103,214 @@ graph LR
 
 ### Module 1: Smart Contract Development [300 points]
 
-#### Core Functions
+## 🎯 Learning Objectives
+- Understand Soulbound Token (SBT) implementation
+- Master Kalp SDK functionalities
+- Learn blockchain state management
+- Implement secure smart contract patterns
+
+## 📋 Prerequisites [25 points]
+- Install Go (>=1.19, <1.20)
+- Set up GOPATH and workspace
+- Basic understanding of blockchain concepts
+- Familiarity with Go programming
+
+## 🚀 Setup Environment [25 points]
+
+1. Create project directory:
+   ```bash
+   mkdir sbtkalp
+   cd sbtkalp
+   ```
+
+2. Initialize Go module:
+   ```bash
+   go mod init sbtkalp
+   ```
+
+3. Install Kalp SDK:
+   ```bash
+   go get -u github.com/p2eengineering/kalp-sdk-public/kalp
+   ```
+
+4. Initialize vendor directory:
+   ```bash
+   go mod vendor
+   ```
+
+## 💎 Core Contract Components [100 points]
+
+### 1. Data Structures [25 points]
 ```go
-// Initialize Contract [100 points]
-func Initialize(sdk kalpsdk.TransactionContextInterface, metadata string) error
+// SBT Metadata structure
+type SBTMetadata struct {
+    Description  string `json:"description"`
+    Name         string `json:"name,omitempty"`
+    Organization string `json:"organization,omitempty"`
+    DateOfIssue  string `json:"dateOfIssue,omitempty"`
+}
 
-// Mint SBT Token [100 points]
-func MintSBT(sdk kalpsdk.TransactionContextInterface, address string) error
+// Main SBT structure
+type SoulboundToken struct {
+    Owner    string `json:"owner"`
+    TokenID  string `json:"tokenID"`
+    Metadata string `json:"metadata"`
+}
 
-// Query SBT Details [100 points]
-func QuerySBT(sdk kalpsdk.TransactionContextInterface, owner string, tokenID string) (*SoulboundToken, error)
+// Smart Contract structure
+type SmartContract struct {
+    kalpsdk.Contract
+}
 ```
+
+### 2. State Management [25 points]
+```go
+// State prefixes for organization
+const sbtPrefix = "soulboundToken"
+const ownerMappingPrefix = "sbtOwnerMapping"
+
+// Composite key creation example
+compositeKey, err := sdk.CreateCompositeKey(sbtPrefix, []string{owner, tokenID})
+```
+
+### 3. Core Functions [50 points]
+
+#### a. Initialize Contract [15 points]
+Challenge Task: Implement the initialization function with the following requirements:
+- Check if contract is already initialized
+- Store metadata in JSON format
+- Set contract state
+- Handle errors appropriately
+
+#### b. MintSBT Function [20 points]
+Challenge Task: Implement token minting with these features:
+- Generate unique TokenID using UUID
+- Validate owner status
+- Store token data
+- Create composite keys
+
+#### c. QuerySBT Function [15 points]
+Challenge Task: Implement query functionality that:
+- Retrieves token details
+- Validates existence
+- Returns formatted data
+
+## 🎮 Implementation Challenges [150 points]
+
+### Challenge 1: Implement Token Management [50 points]
+
+#### Contract State Initialization
+```go
+func (s *SmartContract) Initialize(sdk kalpsdk.TransactionContextInterface, description string) error {
+    // Your initialization code here
+    // Hint: Use the provided metadata structure
+}
+```
+
+Tasks:
+- [ ] Check contract status
+- [ ] Create metadata
+- [ ] Store initialization flag
+- [ ] Handle errors
+
+#### Token Creation System
+```go
+func (s *SmartContract) MintSBT(sdk kalpsdk.TransactionContextInterface, address string) error {
+    // Your minting code here
+    // Hint: Use UUID for token generation
+}
+```
+
+Tasks:
+- [ ] Generate token ID
+- [ ] Validate address
+- [ ] Create token record
+- [ ] Update state
+
+### Challenge 2: Query System [50 points]
+
+Implement these query functions:
+
+1. Basic Token Query
+```go
+func (s *SmartContract) QuerySBT(sdk kalpsdk.TransactionContextInterface, owner string, tokenID string) (*SoulboundToken, error)
+```
+
+2. Owner-Based Query
+```go
+func (s *SmartContract) GetSBTByOwner(sdk kalpsdk.TransactionContextInterface, owner string) (*SoulboundToken, error)
+```
+
+3. Token Listing
+```go
+func (s *SmartContract) GetAllTokenIDs(sdk kalpsdk.TransactionContextInterface) ([]string, error)
+```
+
+### Challenge 3: Advanced Features [50 points]
+
+1. Transfer Prevention System
+```go
+func (s *SmartContract) TransferSBT(sdk kalpsdk.TransactionContextInterface, from string, to string, tokenID string) error {
+    // Implement transfer prevention
+    // Hint: This should always return an error
+}
+```
+
+2. Composite Key Management
+```go
+// Example composite key creation
+mappingKey, err := sdk.CreateCompositeKey(ownerMappingPrefix, []string{address})
+```
+
+## 📝 Code Quality Guidelines [25 points]
+
+1. Code Organization
+   - Clean file structure
+   - Consistent naming
+   - Clear documentation
+
+2. Error Handling
+   - Descriptive messages
+   - Proper propagation
+   - Recovery handling
+
+3. Documentation
+   - Function comments
+   - Usage examples
+   - State management explanation
+
+## 🏆 Success Criteria
+
+To complete Module 1:
+
+1. ✅ Implement all core functions
+2. ✅ Pass provided test cases
+3. ✅ Follow code guidelines
+4. ✅ Document your code
+5. ✅ Handle errors properly
+
+## 📚 Resources
+
+1. Development Tools:
+   - [Kalp SDK Documentation](https://doc.kalp.studio/)
+   - [Go Installation Guide](https://go.dev/doc/install)
+   - [Kalp Studio Console](https://console.kalp.studio/)
+
+2. Documentation:
+   - [Smart Contract Guide](https://doc.kalp.studio/Dev-documentation/Kalp-DLT/Smart-Contract-Write-Test-Deploy-Interact/)
+   - [API Reference](https://doc.kalp.studio/Getting-started/Kalp-API-Overview/)
+   - [Deployment Guide](https://doc.kalp.studio/Dev-documentation/Kalp-DLT/Smart-Contract-Write-Test-Deploy-Interact/Deploy-the-smart-contract/)
+
+## 🎯 Next Steps
+
+After completion:
+1. Review your implementation
+2. Document your learnings
+3. Prepare for Module 2
+4. Share your achievements
+
+Good luck with the challenge! 🚀
+
 
 ### Module 2: Frontend Integration [300 points]
 
