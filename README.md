@@ -1,164 +1,124 @@
-# 🎓 Build Your Own Certification System using Soulbound Tokens on Kalp Blockchain
+# 🎓 Build Your Own Certification System using Soulbound Tokens
 
-## On-Chain Certification Challenge
+<div align="center">
 
----
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Kalp%20Blockchain-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-orange.svg)
 
-## What is this challenge about?
+**An interactive blockchain development challenge for students**
 
-This challenge involves developing a **certification system** using **Soulbound Tokens (SBTs)** on the **Kalp blockchain**. You will:
+[Start Challenge](#getting-started) · 
+[View Demo](https://demo.kalp.network) · 
+[Report Bug](https://github.com/thekalpstudio/issues) · 
+[Request Feature](https://github.com/thekalpstudio/issues)
 
-- Create a **smart contract** in **Go** that manages non-transferable certificates as Soulbound Tokens
-- Issue unique certifications that cannot be transferred between addresses
-- Query and verify certificates directly on the blockchain
-
-This simulates real-world scenarios where organizations need to issue verifiable credentials that should remain permanently associated with the recipient, such as academic degrees, professional certifications, or achievement badges.
-
-## What will you learn?
-
-**By participating in this challenge, you will:**
-
-- Understand the implementation of **Soulbound Tokens** (Non-transferable NFTs)
-- Learn how to develop and deploy smart contracts on the **Kalp blockchain**
-- Gain hands-on experience with the **Go** programming language
-- Master state management in blockchain applications
-- Learn about composite keys and efficient data storage patterns
-- Understand authorization and access control in smart contracts
-- Enhance your skills in blockchain development and decentralized applications (**dApps**)
+</div>
 
 ---
-## 🌟 Features
 
-- Issue non-transferable Soulbound Tokens (SBTs)
-- View certification status and details
-- Modern, responsive UI built with Next.js and Tailwind CSS
-- Secure authentication using API keys
-- Real-time blockchain interaction
+## 🌟 Achievement Tracks
 
-## 🛠️ Tech Stack
+### 🏆 Beginner Track (0-400 points)
+```
+📚 Learn Blockchain Basics  [50 points]
+🔧 Setup Development Environment [50 points]
+🚀 Deploy First Smart Contract [100 points]
+💎 Create Your First SBT [100 points]
+🔍 Execute Basic Queries [100 points]
+```
 
-- **Smart Contract:** Go + Kalp SDK
-- **Frontend:** Next.js, TypeScript, Tailwind CSS
-- **Blockchain:** Kalp Network
-- **API:** RESTful endpoints via Kalp Studio
+### 🎯 Intermediate Track (400-700 points)
+```
+🔄 Implement Advanced Contract Functions [100 points]
+🎨 Build Basic Frontend [100 points]
+🔌 Integrate Contract with Frontend [100 points]
+```
 
-## 📦 Installation
+### 👑 Advanced Track (700-1000 points)
+```
+🎮 Create Interactive UI [100 points]
+📊 Implement Analytics Dashboard [100 points]
+🌐 Deploy Full Production DApp [100 points]
+```
+
+## 🎯 Challenge Overview
+
+Welcome to the Certify DApp Challenge! This hands-on tutorial will guide you through building a complete blockchain-based certification system. By the end, you'll have created a fully functional DApp that issues and manages Soulbound Tokens (SBTs) on the Kalp blockchain.
+
+### What You'll Build
+
+```mermaid
+graph LR
+    A[Smart Contract] --> B[SBT Token]
+    B --> C[Frontend]
+    C --> D[User Interface]
+    D --> E[Certification System]
+```
+
+### Learning Outcomes
+- 🔷 Master Soulbound Token implementation
+- 🔷 Develop production-grade smart contracts
+- 🔷 Build modern web frontends with Next.js
+- 🔷 Integrate blockchain with web applications
+- 🔷 Deploy full-stack DApps
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Go (>=1.19, <1.20)
-- Node.js (>=14.x)
-- npm (>=6.x)
+| Tool | Version | Download |
+|------|---------|----------|
+| Go | >=1.19, <1.20 | [Download](https://go.dev/dl/) |
+| Node.js | >=14.x | [Download](https://nodejs.org/) |
+| npm | >=6.x | Included with Node.js |
+| Postman | Latest | [Download](https://www.postman.com/downloads/) |
+| Kalp Studio Account | - | [Sign Up](https://console.kalp.studio/) |
 
-### Smart Contract Setup
+### 📦 Quick Start
 
-1. Clone the repository:
-```bash
-git clone 
-cd 
-```
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/thekalpstudio/Certify.git
+   cd certify
+   ```
 
-2. Navigate to smart contract directory:
-```bash
-cd sbtkalp
-```
+2. **Setup Smart Contract**
+   ```bash
+   cd sbtkalp
+   go mod tidy
+   ```
 
-3. Install dependencies:
-```bash
-go mod tidy
-```
+3. **Configure Frontend**
+   ```bash
+   cd ../certification
+   npm install
+   cp .env.example .env.local
+   ```
 
-### Frontend Setup
+## 💎 Challenge Modules
 
-1. Navigate to frontend directory:
-```bash
-cd..
-cd certification
-```
+### Module 1: Smart Contract Development [300 points]
 
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Create `.env.local` file:
-```bash
-cp .env.example .env.local
-```
-
-4. Update environment variables:
-```env
-NEXT_PUBLIC_API_KEY=your-kalp-api-key
-```
-
-## 🚀 Deployment
-
-### Smart Contract Deployment
-
-1. Log in to [Kalp Studio](https://studio.kalp.network)
-2. Navigate to "Deploy Contract"
-3. Upload the smart contract
-4. Save the generated contract ID and API endpoints
-
-### Frontend Deployment
-
-1. Build the application:
-```bash
-npm run build
-```
-
-2. Start the production server:
-```bash
-npm run dev
-```
-
-## 🔑 API Configuration
-
-Update the following in your frontend:
-
-1. Contract ID: `vHYQcRijQGB3UpVhqc3UeBM2D3ztjPuS1732534432325`
-2. API Key: Your generated API key
-3. Default wallet: `ded665bca7d412891f44a571d908b66184b0ee10`
-
-## 📝 Smart Contract Methods
-
-### Initialize
+#### Core Functions
 ```go
-Initialize(sdk kalpsdk.TransactionContextInterface, metadata string) error
+// Initialize Contract [100 points]
+func Initialize(sdk kalpsdk.TransactionContextInterface, metadata string) error
+
+// Mint SBT Token [100 points]
+func MintSBT(sdk kalpsdk.TransactionContextInterface, address string) error
+
+// Query SBT Details [100 points]
+func QuerySBT(sdk kalpsdk.TransactionContextInterface, owner string, tokenID string) (*SoulboundToken, error)
 ```
-Initializes the SBT contract with metadata.
 
-### MintSBT
-```go
-MintSBT(sdk kalpsdk.TransactionContextInterface, address string) error
-```
-Issues a new SBT to the specified address.
+### Module 2: Frontend Integration [300 points]
 
-### QuerySBT
-```go
-QuerySBT(sdk kalpsdk.TransactionContextInterface, owner string, tokenID string) (*SoulboundToken, error)
-```
-Retrieves SBT details by owner and token ID.
-
-### GetSBTByOwner
-```go
-GetSBTByOwner(sdk kalpsdk.TransactionContextInterface, owner string) (*SoulboundToken, error)
-```
-Retrieves SBT details by owner address.
-
-### GetAllTokenIDs
-```go
-GetAllTokenIDs(sdk kalpsdk.TransactionContextInterface) ([]string, error)
-```
-Returns all issued token IDs.
-
-## 🎯 Usage Examples
-
-### Minting a New SBT
 ```typescript
+// Example: Mint New Token [100 points]
 const mintSBT = async (recipientAddress: string) => {
   try {
-    await fetch('https://gateway-api.kalp.studio/v1/contract/kalp/invoke/vHYQcRijQGB3UpVhqc3UeBM2D3ztjPuS1732534432325/MintSBT', {
+    await fetch('https://gateway-api.kalp.studio/v1/contract/kalp/invoke/[CONTRACT_ID]/MintSBT', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -167,7 +127,7 @@ const mintSBT = async (recipientAddress: string) => {
       body: JSON.stringify({
         network: "TESTNET",
         blockchain: "KALP",
-        walletAddress: "ded665bca7d412891f44a571d908b66184b0ee10",
+        walletAddress: "[YOUR_WALLET]",
         args: {
           address: recipientAddress
         }
@@ -179,12 +139,93 @@ const mintSBT = async (recipientAddress: string) => {
 };
 ```
 
-### Querying an SBT
-```typescript
-const querySBT = async (owner: string, tokenId: string) => {
-  // Implementation similar to mint with different endpoint
-};
-```
+### Module 3: Deployment & Testing [400 points]
+
+1. **Smart Contract Deployment** [150 points]
+   - Follow [Deployment Guide](https://doc.kalp.studio/Dev-documentation/Kalp-DLT/Smart-Contract-Write-Test-Deploy-Interact/Deploy-the-smart-contract/)
+   - Configure [Kalp Wallet](https://doc.kalp.studio/Getting-started/Configure-Kalp-wallet-in-Kalp-studio/)
+
+2. **Frontend Deployment** [150 points]
+   ```bash
+   npm run build
+   npm run dev
+   ```
+
+3. **Integration Testing** [100 points]
+   - Complete [API Testing Guide](https://doc.kalp.studio/Getting-started/Kalp-API-Overview/)
+   - Implement comprehensive test suite
+
+## 🌐 Required Resources
+
+### Smart Contract Links
+- [Kalp Studio Platform](https://console.kalp.studio/)
+- [Sign Up Guide](https://doc.kalp.studio/Getting-started/Onboarding/How-to-Sign-Up-and-Log-In-to-Kalp-Studio-Platform/)
+- [Wallet Configuration](https://doc.kalp.studio/Getting-started/Configure-Kalp-wallet-in-Kalp-studio/)
+- [Contract Deployment](https://doc.kalp.studio/Dev-documentation/Kalp-DLT/Smart-Contract-Write-Test-Deploy-Interact/Deploy-the-smart-contract/)
+- [Contract Interaction](https://doc.kalp.studio/Dev-documentation/Kalp-DLT/Smart-Contract-Write-Test-Deploy-Interact/Interact-with-smart-contract/)
+
+### API Configuration
+- Contract ID: `vHYQcRijQGB3UpVhqc3UeBM2D3ztjPuS1732534432325`
+- Default Wallet: `ded665bca7d412891f44a571d908b66184b0ee10`
+- [API Documentation](https://doc.kalp.studio/Getting-started/Kalp-API-Overview/)
+
+## 🏆 Achievement Unlocking
+
+### Beginner Achievements
+- 🎯 Environment Wizard
+- 🎯 Contract Master
+- 🎯 Token Creator
+
+### Intermediate Achievements
+- 🎯 Frontend Pioneer
+- 🎯 Integration Specialist
+- 🎯 Testing Guru
+
+### Advanced Achievements
+- 🎯 DApp Architect
+- 🎯 Production Master
+- 🎯 Full Stack Developer
+
+## 🆘 Support & Community
+
+- [Developer Documentation](https://doc.kalp.studio/)
+- [Community Forum](https://community.kalp.network/)
+- [GitHub Issues](https://github.com/thekalpstudio/Certify/issues)
+- [Troubleshooting Guide](https://doc.kalp.studio/Getting-started/Troubleshooting/)
+
+## 📜 Certification Process
+
+1. Complete all challenge modules
+2. Submit your project for review
+3. Pass the technical assessment
+4. Receive your SBT certification
+5. Join the Kalp Developer Community
+
+## 🎮 Best Practices
+
+- ✅ Follow Go programming conventions
+- ✅ Write comprehensive tests
+- ✅ Document your code
+- ✅ Use proper error handling
+- ✅ Implement security best practices
+
+## 🔜 Next Steps
+
+After completing this challenge:
+1. Explore advanced Kalp features
+2. Contribute to open source projects
+3. Join the developer community
+4. Build your own DApps
+
+---
+
+<div align="center">
+
+**Happy Coding! 🚀**
+
+[Get Started](#getting-started) | [Join Community](https://community.kalp.network/) | [View Documentation](https://doc.kalp.studio/)
+
+</div>
 
 
 ## 📄 License
