@@ -9,7 +9,7 @@
 **An interactive blockchain development challenge for students**
 
 [Start Challenge](#getting-started) · 
-[View Demo](https://demo.kalp.network) · 
+[View Demo](https://ks-certify-dapp.netlify.app/) · 
 [Report Bug](https://github.com/thekalpstudio/issues) · 
 [Request Feature](https://github.com/thekalpstudio/issues)
 
