@@ -16,6 +16,9 @@
 </div>
 
 ---
+## Certify
+<img width="1435" alt="Screenshot 2025-01-21 at 3 19 25 PM" src="https://github.com/user-attachments/assets/309fb7a5-77ae-4672-a685-14fa66c6ebd8" />
+
 
 ## 🌟 Achievement Tracks
 
