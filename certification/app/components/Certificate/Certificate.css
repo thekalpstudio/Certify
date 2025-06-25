@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Slab&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.certificate-container {
+  width: 1050px;
+  background: linear-gradient(0deg, #EAE4F1 0%, #EAE4F1 100%), url('/images/bg-pattern.png') lightgray 50% / cover no-repeat;
+  display: flex;
+  width: 1170px;
+}
+
+.certificate-wrapper {
+  margin: 30px;
+  display: flex;
+  border: 1px solid #004AAD;
+  background: linear-gradient(0deg, #EAE4F1 0%, #EAE4F1 100%), url('/images/bg-pattern.png') lightgray 50% / cover no-repeat;
+}
+
+.left-panel {
+  width: 595px;
+  background-color: #000000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto Slab', serif;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  position: absolute;
+  top: 40px;
+}
+
+.logo-digital-south {
+  max-width: 135px;
+  border: 2px solid #2860cb;
+  background-color: #2860cb;
+  padding: 4px 8px;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.logo-digital-south sup {
+  font-size: 7px;
+  font-weight: 100;
+  display: block;
+  color: #cbd4f9;
+  margin-top: 2px;
+}
+
+.chain-logo {
+  width: 50px;
+  height: auto;
+  filter: brightness(0) invert(0.7);
+}
+
+.trust-text {
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+}
+
+.date {
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #FFF;
+  padding: 11px 0px;
+  width: 80%;
+}
+
+.blue-net-image {
+  width: 306px;
+}
+
+.kalp-studio-logo {
+  width: 260px;
+  height: 56px;
+}
+
+.kalp-studio-text {
+  font-size: 14px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.right-panel {
+  flex-grow: 1;
+  background: linear-gradient(0deg, #EAE4F1 0%, #EAE4F1 100%), url('/images/bg-pattern.png') lightgray 50% / cover no-repeat;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-main {
+  font-weight: 700;
+  font-size: 50px;
+  color: #004AAD;
+  font-family: Inter;
+}
+
+.title-sub {
+  font-weight: 700;
+  font-size: 50px;
+  color: #000;
+  font-family: Inter;
+}
+
+.certify-text {
+  font-size: 16px;
+  margin: 109px 0 6px 0;
+  color: #000;
+}
+
+.participant-name {
+  font-weight: 700;
+  color: #004AAD;
+  font-family: Inter;
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.body-text {
+  color: #000;
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 76px;
+  max-width: 83%;
+}
+
+.photo-container {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  border: 1.8px solid #bdbdbd;
+  width: 130px;
+  height: 150px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-photo {
+  margin-bottom: 20px;
+  max-width: 112px;
+  max-height: 112px;
+  object-fit: contain;
+}
+
+.qr-code-container {
+  display: flex;
+  justify-content: center;
+}
+
+.qr-code {
+  width: 90px;
+  height: 90px;
+}
+
+.signatures {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  top: 80px;
+}
+
+.signature-block {
+  text-align: center;
+  width: 30%;
+}
+
+.signature-image {
+  max-width: 100px;
+  height: 46px;
+  margin-bottom: 8px;
+}
+
+.signer-name {
+  color: #000;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.signer-title {
+  color: #000;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+ 
