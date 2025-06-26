@@ -6,6 +6,31 @@ const Certificate = ({ name = "Mr. [Participant's Full name]", date = "23 Januar
   const [qrImage, setQrImage] = useState("/images/qr-code.png");
   const [isLoading, setIsLoading] = useState(false);
 
+  // Function to format date from timestamp to readable format
+  const formatDate = (dateString) => {
+    try {
+      // If it's already in the desired format, return as is
+      if (dateString && !dateString.includes('T') && !dateString.includes('-')) {
+        return dateString;
+      }
+      
+      // Convert timestamp to readable date
+      const dateObj = new Date(dateString);
+      if (isNaN(dateObj.getTime())) {
+        return "23 January, 2024"; // fallback
+      }
+      
+      const options = { 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric' 
+      };
+      return dateObj.toLocaleDateString('en-GB', options);
+    } catch {
+      return "23 January, 2024"; // fallback
+    }
+  };
+
   useEffect(() => {
     const fetchImages = async () => {
       // Only fetch if we have a wallet address (hash) and haven't already received a photo prop
@@ -57,9 +82,9 @@ const Certificate = ({ name = "Mr. [Participant's Full name]", date = "23 Januar
         <aside className="left-panel">
           <div className="header">
             <img src="/images/left-header.png" alt="Kalp Studio logo" className="kalp-studio-logo" />
-            <div className="trust-text">India's Leading Blockchain
+            <div className="trust-text">India&apos;s Leading Blockchain
 education trust</div>
-            <div className="date">{date}</div>
+            <div className="date">{formatDate(date)}</div>
           </div>
           <img src="/images/left-bg.png" alt="Background net" className="blue-net-image" />
         </aside>
