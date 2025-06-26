@@ -1,11 +1,11 @@
 "use client";
 const useSBTApi = () => {
   const baseURL = "https://gateway-api.kalp.studio/v1/contract/kalp";
-  const fixedWallet = "4694bc679e57ba241ae27ea5d3d72d00f12f1f34";
+  const fixedWallet = "ad5b600d5bae6bb145ed6b56e7cd1d6b2bfcb3ab";
   const initialize = async (description: string) => {
     try {
       const response = await fetch(
-        `${baseURL}/invoke/7ZSLwrP7ga8pKAHD3sVFMBK30HGwEEHl1735894098028/Initialize`,
+        `${baseURL}/invoke/e1yV3tkIGFb9KXuAXb4Ra7gpx4bgSwlL1750852981054/Initialize`,
         {
           method: "POST",
           headers: {
@@ -36,7 +36,7 @@ const useSBTApi = () => {
   ) => {
     try {
       const response = await fetch(
-        `${baseURL}/invoke/7ZSLwrP7ga8pKAHD3sVFMBK30HGwEEHl1735894098028/MintSBT`,
+        `${baseURL}/invoke/e1yV3tkIGFb9KXuAXb4Ra7gpx4bgSwlL1750852981054/MintSBT`,
         {
           method: "POST",
           headers: {
@@ -65,7 +65,7 @@ const useSBTApi = () => {
   const querySBT = async (owner: string, tokenId: string) => {
     try {
       const response = await fetch(
-        `${baseURL}/query/7ZSLwrP7ga8pKAHD3sVFMBK30HGwEEHl1735894098028/QuerySBT`,
+        `${baseURL}/query/e1yV3tkIGFb9KXuAXb4Ra7gpx4bgSwlL1750852981054/QuerySBT`,
         {
           method: "POST",
           headers: {
@@ -92,7 +92,7 @@ const useSBTApi = () => {
   const getSBTByOwner = async (owner: string) => {
     try {
       const response = await fetch(
-        `${baseURL}/query/7ZSLwrP7ga8pKAHD3sVFMBK30HGwEEHl1735894098028/GetSBTByOwner`,
+        `${baseURL}/query/e1yV3tkIGFb9KXuAXb4Ra7gpx4bgSwlL1750852981054/GetSBTByOwner`,
         {
           method: "POST",
           headers: {
@@ -118,7 +118,7 @@ const useSBTApi = () => {
   const getAllTokenIDs = async () => {
     try {
       const response = await fetch(
-        `${baseURL}/query/7ZSLwrP7ga8pKAHD3sVFMBK30HGwEEHl1735894098028/GetAllTokenIDs`,
+        `${baseURL}/query/e1yV3tkIGFb9KXuAXb4Ra7gpx4bgSwlL1750852981054/GetAllTokenIDs`,
         {
           method: "POST",
           headers: {
@@ -141,7 +141,7 @@ const useSBTApi = () => {
   const attemptTransfer = async (from: string, to: string, tokenId: string) => {
     try {
       const response = await fetch(
-        `${baseURL}/query/7ZSLwrP7ga8pKAHD3sVFMBK30HGwEEHl1735894098028/TransferSBT`,
+        `${baseURL}/query/e1yV3tkIGFb9KXuAXb4Ra7gpx4bgSwlL1750852981054/TransferSBT`,
         {
           method: "POST",
           headers: {
