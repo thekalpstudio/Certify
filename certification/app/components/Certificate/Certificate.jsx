@@ -38,7 +38,7 @@ const Certificate = ({ name = "Mr. [Participant's Full name]", date = "23 Januar
         setIsLoading(true);
         try {
           const certiqoBEURL = process.env.NEXT_PUBLIC_CERTIFO_BE_URL || 'https://api.certiqo.com';
-          const response = await fetch(`${certiqoBEURL}/token/${hash}/links`);
+          const response = await fetch(`${certiqoBEURL}/api/v1/token/${hash}/links`);
           
           if (response.ok) {
             const data = await response.json();
