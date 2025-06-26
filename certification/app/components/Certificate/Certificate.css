@@ -161,7 +161,7 @@ body {
   font-weight: 500;
   font-size: 15px;
   line-height: 1.4;
-  margin-bottom: 76px;
+  margin-bottom: 40px;
   max-width: 83%;
 }
 
@@ -210,6 +210,7 @@ body {
 .qr-code-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 .qr-code {
@@ -222,19 +223,23 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  margin-top: 20px;
   position: relative;
-  top: 80px;
 }
 
 .signature-block {
   text-align: center;
   width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .signature-image {
   max-width: 100px;
   height: 46px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  display: block;
 }
 
 .signer-name {
