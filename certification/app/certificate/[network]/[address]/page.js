@@ -84,7 +84,7 @@ export default function OwnershipChecker() {
               title="College Degree"
               name={ownership.metadata.name || "Your Name"}
               date={ownership.metadata.dateOfIssue || "Date"}
-              hash={ownership.tokenID || "Recipient Address"}
+              hash={params.address || "Recipient Address"}
               college={ownership.owner || "IIT"}
             />
           </div>

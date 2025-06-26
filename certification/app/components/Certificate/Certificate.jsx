@@ -1,7 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Certificate.css"; // move your styles to this file or use styled-components
 
-const Certificate = ({ name = "Mr. [Participant’s Full name]", date = "23 January, 2024", photo }) => {
+const Certificate = ({ name = "Mr. [Participant's Full name]", date = "23 January, 2024", photo, hash }) => {
+  const [profileImage, setProfileImage] = useState(photo || "/images/profile.png");
+  const [qrImage, setQrImage] = useState("/images/qr-code.png");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      // Only fetch if we have a wallet address (hash) and haven't already received a photo prop
+      if (hash && !photo) {
+        setIsLoading(true);
+        try {
+          const certiqoBEURL = process.env.NEXT_PUBLIC_CERTIFO_BE_URL || 'https://api.certiqo.com';
+          const response = await fetch(`${certiqoBEURL}/token/${hash}/links`);
+          
+          if (response.ok) {
+            const data = await response.json();
+            
+            // Check if the response has the expected structure
+            if (data.links && data.links.profile && data.links.qr) {
+              setProfileImage(data.links.profile);
+              setQrImage(data.links.qr);
+            } else {
+              // If response doesn't have expected structure, fall back to defaults
+              console.warn('API response does not contain expected profile/qr links');
+              setProfileImage("/images/profile.png");
+              setQrImage("/images/qr-code.png");
+            }
+          } else {
+            // If API call fails, fall back to defaults
+            console.warn('Failed to fetch images from API, using defaults');
+            setProfileImage("/images/profile.png");
+            setQrImage("/images/qr-code.png");
+          }
+        } catch (error) {
+          // If there's an error, fall back to defaults
+          console.warn('Error fetching images from API:', error);
+          setProfileImage("/images/profile.png");
+          setQrImage("/images/qr-code.png");
+        } finally {
+          setIsLoading(false);
+        }
+      } else if (photo) {
+        // If photo prop is provided, use it
+        setProfileImage(photo);
+      }
+    };
+
+    fetchImages();
+  }, [hash, photo]);
+
   return (
     <div className="certificate-container">
       <div className="certificate-wrapper">
@@ -17,7 +66,21 @@ education trust</div>
 
         <section className="right-panel">
           <div className="photo-container">
-            <img src={photo || "/images/profile.png"} alt="Participant" className="user-photo" />
+            {isLoading ? (
+              <div className="user-photo loading-placeholder">
+                <div className="loading-spinner">Loading...</div>
+              </div>
+            ) : (
+              <img 
+                src={profileImage} 
+                alt="Participant" 
+                className="user-photo"
+                onError={(e) => {
+                  // If the fetched image fails to load, fall back to default
+                  e.target.src = "/images/profile.png";
+                }}
+              />
+            )}
           </div>
 
           <div className="header-text">
@@ -33,7 +96,15 @@ education trust</div>
           </span>
 
           <div className="qr-code-container">
-            <img src="/images/qr-code.png" alt="QR Code" className="qr-code" />
+            <img 
+              src={qrImage} 
+              alt="QR Code" 
+              className="qr-code"
+              onError={(e) => {
+                // If the fetched QR image fails to load, fall back to default
+                e.target.src = "/images/qr-code.png";
+              }}
+            />
           </div>
 
           <div className="signatures">
