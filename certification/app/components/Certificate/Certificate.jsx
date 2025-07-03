@@ -154,17 +154,20 @@ const Certificate = ({
 
         <div className="signatures">
           <div className="signature-block">
-            <img src="lalith_signature.png" alt="Lalith Krishnan H Signature" />
+            <img
+              src="/lalith_signature.png"
+              alt="Lalith Krishnan H Signature"
+            />
             <p>Lalith Krishnan H</p>
             <small>Director Digital South Trust</small>
           </div>
           <div className="signature-block">
-            <img src="sahana_signature.png" alt="Shahana Prakasam Signature" />
+            <img src="/sahana_signature.png" alt="Shahana Prakasam Signature" />
             <p>Shahana Prakasam</p>
             <small>Intellectual Property</small>
           </div>
           <div className="signature-block">
-            <img src="kajol_signature.png" alt="Kajol Golchha Signature" />
+            <img src="/kajol_signature.png" alt="Kajol Golchha Signature" />
             <p>Kajol Golchha</p>
             <small>Certified Trainer</small>
           </div>

@@ -104,6 +104,7 @@ body {
   border-bottom: 2px solid #ccc;
   padding-bottom: 4px;
   display: inline-block;
+  text-transform: capitalize;
 }
 
 .participant-name .salutation,
