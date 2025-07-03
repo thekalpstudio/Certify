@@ -18,16 +18,18 @@ const MintSbt = () => {
   const [dateOfIssue, setDateOfIssue] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState({ status: "", message: "", hash: "" });
-  const [network, setNetwork] = useState("Holesky");
+  const [network, setNetwork] = useState("Kalp");
+  const [transactionHash, setTransactionHash] = useState("");
 
   const FIXED_WALLET =
     network === "Holesky"
       ? process.env.NEXT_PUBLIC_HOLESKY_WALLET
       : process.env.NEXT_PUBLIC_KALP_WALLET;
 
-  const ExplorerLink = network === "Holesky"
-  ? "https://holesky.etherscan.io/tx/"
-  : "https://kalpscan.io/transactions?transactionId="
+  const ExplorerLink =
+    network === "Holesky"
+      ? "https://holesky.etherscan.io/tx/"
+      : "https://kalpscan.io/transactions?transactionId=";
 
   useEffect(() => {
     const savedNetwork = localStorage.getItem("selectedNetwork");
@@ -36,24 +38,24 @@ const MintSbt = () => {
     }
   }, []);
 
-const handleSendNotification = async (transactionHash) => {
-  try {
-    await sendNotification(
-    {
-      name: userName,
-      transactionHash: `${ExplorerLink}${transactionHash}`,
-      view_link: `${window.location.origin}/certificate/${network}/${recipientAddress}`,
-    },
-    {
-      userId: recipientAddress,
-      email: userEmail
+  const handleSendNotification = async (transactionHash) => {
+    try {
+      await sendNotification(
+        {
+          name: userName,
+          transactionHash: `${ExplorerLink}${transactionHash}`,
+          view_link: `${window.location.origin}/certificate/${network}/${recipientAddress}`,
+        },
+        {
+          userId: recipientAddress,
+          email: userEmail,
+        }
+      );
+      console.log("Notification sent successfully");
+    } catch (error) {
+      console.error("Failed to send notification:", error);
     }
-    );
-    console.log('Notification sent successfully');
-  } catch (error) {
-    console.error('Failed to send notification:', error);
-  }
-};
+  };
 
   const handleMint = async () => {
     if (!recipientAddress || !userName || !organization || !dateOfIssue) {
@@ -93,7 +95,13 @@ const handleSendNotification = async (transactionHash) => {
           throw new Error("Failed to mint certification.");
         }
       }
-      const transactionHash = network === "Holesky" ? response.result.result.transactionHash : response.result.transactionId;
+
+      const transactionHash =
+        network === "Holesky"
+          ? response.result.result.transactionHash
+          : response.result.transaction?.txHash;
+
+      setTransactionHash(transactionHash);
       handleSendNotification(transactionHash);
       setResult({
         status: "success",
@@ -125,7 +133,7 @@ const handleSendNotification = async (transactionHash) => {
     <div className="min-h-screen">
       <Navbar2 />
       <div className="flex gap-8 h-[100vh] bg-gradient-to-br from-blue-50 to-indigo-50 px-4 py-4">
-        <div className="w-1/3 ml-16">
+        <div className="w-1/4 ml-16">
           <div className="bg-white rounded-2xl shadow-xl py-4 px-8">
             {/* User Name Input */}
             <div className="mt-4">
@@ -273,10 +281,17 @@ const handleSendNotification = async (transactionHash) => {
                   }`}
                 >
                   {result.message}
-                  {result.hash && <>
-                    <span className="text-black">Link to verify:</span><Link href={`${ExplorerLink}${result.hash}`} target="_blank"><span className="text-blue-600">Click here</span></Link>
-                  </>}
-                  
+                  {result.hash && (
+                    <>
+                      <span className="text-black">Link to verify:</span>
+                      <Link
+                        href={`${ExplorerLink}${result.hash}`}
+                        target="_blank"
+                      >
+                        <span className="text-blue-600">Click here</span>
+                      </Link>
+                    </>
+                  )}
                 </p>
               </div>
             )}
@@ -285,10 +300,10 @@ const handleSendNotification = async (transactionHash) => {
 
         <Certificate
           title="College Degree"
-          name={userName || "Your Name"}
-          date={dateOfIssue || "Date"}
-          hash={recipientAddress || "Recipient Address"}
-          college={organization || "IEM"}
+          name={userName || "Mr. John Doe"}
+          date={dateOfIssue || ""}
+          hash={transactionHash || ""}
+          college={organization || ""}
         />
       </div>
     </div>
