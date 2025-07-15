@@ -1,22 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Slab&display=swap");
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto", sans-serif;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.certificate-container {
+.certificateContainer {
   width: 1000px;
   height: 700px;
   display: flex;
@@ -33,7 +15,7 @@ body {
   background-clip: padding-box;
 }
 
-.left-panel {
+.leftPanel {
   width: 30%;
   padding: 30px 25px;
   color: #fff;
@@ -44,7 +26,7 @@ body {
   box-sizing: border-box;
 }
 
-.right-panel {
+.rightPanel {
   width: 70%;
   padding: 30px 15px;
   color: #333;
@@ -55,7 +37,7 @@ body {
   margin-right: 30px;
 }
 
-.top-right-image {
+.topRightImage {
   position: absolute;
   top: 30px;
   right: 12px;
@@ -64,7 +46,7 @@ body {
   object-fit: fill;
 }
 
-.certificate-title {
+.certificateTitle {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,8 +54,8 @@ body {
   position: relative;
 }
 
-.certificate-title h1,
-.certificate-title h2 {
+.certificateTitle h1,
+.certificateTitle h2 {
   font-family: "Playfair Display", serif;
   font-size: 46px;
   font-weight: 700;
@@ -82,21 +64,21 @@ body {
   margin: 0;
 }
 
-.certificate-title h1 {
+.certificateTitle h1 {
   color: #2a628f;
 }
 
-.certificate-title h2 {
+.certificateTitle h2 {
   color: #000;
   margin-bottom: 35px;
 }
 
-.intro-text {
+.introText {
   font-size: 15px;
   margin-bottom: 8px;
 }
 
-.participant-name {
+.participantName {
   font-size: 36px;
   font-weight: 700;
   color: #2a628f;
@@ -107,55 +89,55 @@ body {
   text-transform: capitalize;
 }
 
-.participant-name .salutation,
-.participant-name .first-name,
-.participant-name .last-name {
+.participantName .salutation,
+.participantName .firstName,
+.participantName .lastName {
   display: inline-block;
   margin-right: 6px;
 }
 
-.certificate-body {
+.certificateBody {
   font-size: 16px;
   line-height: 1.5;
   margin-top: 0.5px;
   margin-bottom: 15px;
 }
 
-.cert-metadata {
+.certMetadata {
   margin: 20px 0;
 }
 
-.metadata-container {
+.metadataContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
 
-.text-metadata {
+.textMetadata {
   text-align: left;
 }
 
-.text-metadata p {
+.textMetadata p {
   font-size: 14.5px;
   color: #333;
   margin: 4px 0;
 }
 
-.issued-date-value,
-.certificate-id-value {
+.issuedDateValue,
+.certificateIdValue {
   font-weight: 600;
   color: #2a628f;
 }
 
-.qr-code {
+.qrCode {
   width: 80px;
   height: 80px;
   border: 5px solid #fff;
   flex-shrink: 0;
 }
 
-.qr-code img {
+.qrCode img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -174,14 +156,14 @@ body {
   right: 0;
 }
 
-.signature-block {
+.signatureBlock {
   text-align: center;
   flex: 1;
   padding: 0 10px;
   box-sizing: border-box;
 }
 
-.signature-block img {
+.signatureBlock img {
   height: 60px; /* Fixed height */
   width: auto;
   display: block;
@@ -191,13 +173,31 @@ body {
   object-fit: contain;
 }
 
-.signature-block p {
+.signatureBlock p {
   margin: 5px 0 0 0;
   font-size: 13.5px;
   font-weight: 700;
 }
 
-.signature-block small {
+.signatureBlock small {
   font-size: 11.5px;
+  color: #666;
+}
+
+.loadingPlaceholder {
+  position: absolute;
+  top: 30px;
+  right: 12px;
+  width: 125px;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
+
+.loadingSpinner {
+  font-size: 14px;
   color: #666;
 }

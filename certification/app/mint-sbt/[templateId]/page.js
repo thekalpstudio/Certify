@@ -1,14 +1,17 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Navbar2 from "../components/Navbar/Navbar2";
-import Certificate from "../components/Certificate/Certificate";
+import Navbar2 from "../../components/Navbar/Navbar2";
 import { Wallet, Lock } from "lucide-react";
 import useSBTApi from "@/hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
 import { sendNotification } from "@/lib/notification";
 import Link from "next/link";
+import CertificateDigitalSouth from "../../components/certificates/CertificateDigitalSouth/Certificate";
+import CertificateDigitalSouthWithHindustanCollege from "../../components/certificates/CertificateDigitalSouthWithHindustanCollege/index";
+import { useParams } from "next/navigation";
 
 const MintSbt = () => {
+  const { templateId } = useParams();
   const { mintSBT } = useSBTApi();
   const { mintSBT: mintEVMSBT } = useEVMSBTApi();
   const [recipientAddress, setRecipientAddress] = useState("");
@@ -20,6 +23,11 @@ const MintSbt = () => {
   const [result, setResult] = useState({ status: "", message: "", hash: "" });
   const [network, setNetwork] = useState("Kalp");
   const [transactionHash, setTransactionHash] = useState("");
+
+  const CertificateComponent =
+    templateId === "2"
+      ? CertificateDigitalSouthWithHindustanCollege
+      : CertificateDigitalSouth;
 
   const FIXED_WALLET =
     network === "Holesky"
@@ -298,7 +306,7 @@ const MintSbt = () => {
           </div>
         </div>
 
-        <Certificate
+        <CertificateComponent
           title="College Degree"
           name={userName || "Mr. John Doe"}
           date={dateOfIssue || ""}

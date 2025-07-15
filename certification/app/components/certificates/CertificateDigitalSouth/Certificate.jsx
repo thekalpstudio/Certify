@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Certificate.css"; // move your styles to this file or use styled-components
+import "../certificate.css";
+import styles from "./Certificate.module.css";
 
-const Certificate = ({
+const CertificateDigitalSouth = ({
   name = "Mr. [Participant's Full name]",
   date = "",
   photo,
@@ -93,53 +94,55 @@ const Certificate = ({
   }, [hash, photo]);
 
   return (
-    <div className="certificate-container">
-      <div className="left-panel"></div>
+    <div className={styles.certificateContainer}>
+      <div className={styles.leftPanel}></div>
 
-      <div className="right-panel">
+      <div className={styles.rightPanel}>
         {isLoading ? (
-          <div className="loading-placeholder">
-            <div className="loading-spinner">Loading...</div>
+          <div className={styles.loadingPlaceholder}>
+            <div className={styles.loadingSpinner}>Loading...</div>
           </div>
         ) : (
           <img
             src={profileImage}
             alt="Logo"
-            className="top-right-image"
+            className={styles.topRightImage}
             onError={(e) => {
               // If the fetched image fails to load, fall back to default
               e.target.src = "Participant_image.png";
             }}
           />
         )}
-        <div className="certificate-title">
+        <div className={styles.certificateTitle}>
           <h1>Certificate</h1>
           <h2>of Completion</h2>
         </div>
 
-        <p className="intro-text">This is to certify that</p>
+        <p className={styles.introText}>This is to certify that</p>
 
-        <span className="participant-name">{name}</span>
+        <span className={styles.participantName}>{name}</span>
 
-        <p className="certificate-body">
+        <p className={styles.certificateBody}>
           has successfully completed the Blockchain Online Certification
           Program, gaining essential knowledge in Blockchain Basics,
           Cryptocurrency Types, Indian Laws, and Global Blockchain Trends.
         </p>
 
-        <div className="cert-metadata">
-          <div className="metadata-container">
-            <div className="text-metadata">
+        <div className={styles.certMetadata}>
+          <div className={styles.metadataContainer}>
+            <div className={styles.textMetadata}>
               <p>
                 <span className="issued-date-label">Issued on:</span>{" "}
-                <span className="issued-date-value">{formatDate(date)}</span>
+                <span className={styles.issuedDateValue}>
+                  {formatDate(date)}
+                </span>
               </p>
               <p>
                 <span className="certificate-id-label">Certificate ID:</span>{" "}
-                <span className="certificate-id-value">{hash}</span>
+                <span className={styles.certificateIdValue}>{hash}</span>
               </p>
             </div>
-            <div className="qr-code">
+            <div className={styles.qrCode}>
               <img
                 src={qrImage}
                 alt="QR Code"
@@ -152,8 +155,8 @@ const Certificate = ({
           </div>
         </div>
 
-        <div className="signatures">
-          <div className="signature-block">
+        <div className={styles.signatures}>
+          <div className={styles.signatureBlock}>
             <img
               src="/lalith_signature.png"
               alt="Lalith Krishnan H Signature"
@@ -161,12 +164,12 @@ const Certificate = ({
             <p>Lalith Krishnan H</p>
             <small>Director Digital South Trust</small>
           </div>
-          <div className="signature-block">
+          <div className={styles.signatureBlock}>
             <img src="/sahana_signature.png" alt="Shahana Prakasam Signature" />
             <p>Shahana Prakasam</p>
             <small>Intellectual Property</small>
           </div>
-          <div className="signature-block">
+          <div className={styles.signatureBlock}>
             <img src="/kajol_signature.png" alt="Kajol Golchha Signature" />
             <p>Kajol Golchha</p>
             <small>Certified Trainer</small>
@@ -177,4 +180,4 @@ const Certificate = ({
   );
 };
 
-export default Certificate;
+export default CertificateDigitalSouth;

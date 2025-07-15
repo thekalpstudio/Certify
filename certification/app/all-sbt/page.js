@@ -56,7 +56,7 @@ export default function AllSBTs() {
         } else {
           setError("Failed to fetch SBT IDs.");
         }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("An error occurred while fetching SBT IDs.");
       } finally {
@@ -70,7 +70,7 @@ export default function AllSBTs() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white">
       <Navbar2 />
-      
+
       <main className="container mx-auto px-6 py-12">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
@@ -79,7 +79,8 @@ export default function AllSBTs() {
               Certificate Tokens Registry
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              View all Soulbound Tokens issued by the Organization. Each token represents a unique certification or achievement.
+              View all Soulbound Tokens issued by the Organization. Each token
+              represents a unique certification or achievement.
             </p>
           </div>
 

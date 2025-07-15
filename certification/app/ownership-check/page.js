@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Navbar2 from "../components/Navbar/Navbar2";
-import Certificate from "../components/Certificate/Certificate";
+import Certificate from "../components/certificates/CertificateDigitalSouth/Certificate";
 import useSBTApi from "../../hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
 
@@ -56,7 +56,7 @@ export default function OwnershipChecker() {
 
         setOwnership({
           owner: response.result.result.owner,
-          tokenID: response.result.result[1], 
+          tokenID: response.result.result[1],
           metadata: parsedMetadata,
           timestamp: response.timestamp,
         });
