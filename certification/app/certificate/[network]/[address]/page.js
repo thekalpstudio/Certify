@@ -1,29 +1,25 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import CertificateDigitalSouth from "../../../../components/certificates/CertificateDigitalSouth/Certificate";
-import useSBTApi from "../../../../../hooks/userSBT";
+import CertificateDigitalSouth from "../../../components/certificates/CertificateDigitalSouth/Certificate";
+import useSBTApi from "../../../../hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
-import usePDFDownload from "../../../../../hooks/usePDFDownload";
-import CertificateDigitalSouthWithHindustanCollege from "../../../../components/certificates/CertificateDigitalSouthWithHindustanCollege";
+import usePDFDownload from "../../../../hooks/usePDFDownload";
+import CertificateDigitalSouthWithHindustanCollege from "../../../components/certificates/CertificateDigitalSouthWithHindustanCollege";
 
 export default function OwnershipChecker() {
   const params = useParams();
   const { getSBTByOwner } = useSBTApi();
   const { getSBTByOwner: getEVMSBTByOwner } = useEVMSBTApi();
   const { downloadPDF } = usePDFDownload();
+  const [links, setLinks] = useState(null);
   const [ownership, setOwnership] = useState(null);
   const [error, setError] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
 
-  useEffect(() => {
-    const network = params.network;
-    const address = params.address;
-    handleCheck(network, address);
-  }, []);
-
   const handleCheck = async (network, owner) => {
     setOwnership(null);
+
     try {
       let response;
       if (network === "Holesky") {
@@ -62,6 +58,43 @@ export default function OwnershipChecker() {
     }
   };
 
+  const fetchLinks = async (hash) => {
+    try {
+      const certiqoBEURL =
+        process.env.NEXT_PUBLIC_CERTIFO_BE_URL || "https://api.certiqo.com";
+      const response = await fetch(
+        `${certiqoBEURL}/api/v1/token/${hash}/links`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+
+        // Check if the response has the expected structure
+        if (data.links && data.links.profile && data.links.qr) {
+          setLinks(data.links);
+        } else {
+          // If response doesn't have expected structure, fall back to defaults
+          setLinks(null);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch links:", error);
+    }
+  };
+
+  const getOrgId = () => {
+    const splitURL = links?.qr?.split("/");
+
+    return splitURL?.length ? splitURL[splitURL.length - 2] : null;
+  };
+
+  useEffect(() => {
+    const network = params.network;
+    const address = params.address;
+
+    handleCheck(network, address).then(() => fetchLinks(params.address));
+  }, []);
+
   const handleDownloadPDF = async () => {
     setIsDownloading(true);
     try {
@@ -76,10 +109,14 @@ export default function OwnershipChecker() {
     }
   };
 
+  if (!ownership || !links) {
+    return <div>Loading...</div>;
+  }
+
   const CertificateComponent =
-    params.templateId === "2"
-      ? CertificateDigitalSouthWithHindustanCollege
-      : CertificateDigitalSouth;
+    getOrgId() === "26688ec0-f66a-46e1-a3d1-93469fdfecb6"
+      ? CertificateDigitalSouth
+      : CertificateDigitalSouthWithHindustanCollege;
 
   return (
     <div>
@@ -94,6 +131,7 @@ export default function OwnershipChecker() {
               date={ownership.metadata.dateOfIssue || "Date"}
               hash={params.address || "Recipient Address"}
               college={ownership.owner || "IIT"}
+              links={links}
             />
           </div>
         )}

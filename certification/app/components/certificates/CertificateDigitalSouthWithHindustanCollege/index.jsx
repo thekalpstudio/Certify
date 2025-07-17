@@ -5,10 +5,13 @@ import styles from "./Certificate.module.css";
 const CertificateDigitalSouthWithHindustanCollege = ({
   name = "Mr. Parambir Singh",
   date = "04 July 2025",
-  certificateId = "DST-HCAS-2025-0042",
+  photo,
   hash,
+  links,
 }) => {
+  const [, setProfileImage] = useState(photo || "/images/profile.png");
   const [qrImage, setQrImage] = useState("/templates/template2/qrcode.png");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Function to format date from timestamp to readable format
   const formatDate = (dateString) => {
@@ -40,42 +43,20 @@ const CertificateDigitalSouthWithHindustanCollege = ({
   };
 
   useEffect(() => {
-    const fetchImages = async () => {
-      // Only fetch if we have a wallet address (hash)
-      if (hash) {
-        try {
-          const certiqoBEURL =
-            process.env.NEXT_PUBLIC_CERTIFO_BE_URL || "https://api.certiqo.com";
-          const response = await fetch(
-            `${certiqoBEURL}/api/v1/token/${hash}/links`
-          );
+    if (links) {
+      setIsLoading(true);
+      setProfileImage(links.profile);
+      setQrImage(links.qr);
+      setIsLoading(false);
+    } else {
+      setProfileImage("/images/profile.png");
+      setQrImage("/images/qr-code.png");
+    }
+  }, [links]);
 
-          if (response.ok) {
-            const data = await response.json();
-
-            // Check if the response has the expected structure
-            if (data.links && data.links.qr) {
-              setQrImage(data.links.qr);
-            } else {
-              // If response doesn't have expected structure, fall back to defaults
-              console.warn("API response does not contain expected qr link");
-              setQrImage("/templates/template2/qrcode.png");
-            }
-          } else {
-            // If API call fails, fall back to defaults
-            console.warn("Failed to fetch images from API, using defaults");
-            setQrImage("/templates/template2/qrcode.png");
-          }
-        } catch (error) {
-          // If there's an error, fall back to defaults
-          console.warn("Error fetching images from API:", error);
-          setQrImage("/templates/template2/qrcode.png");
-        }
-      }
-    };
-
-    fetchImages();
-  }, [hash]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.certificateWrapper}>
@@ -112,7 +93,7 @@ const CertificateDigitalSouthWithHindustanCollege = ({
             </p>
             <p className={styles.infoLine}>
               <strong>Certificate ID:</strong>{" "}
-              <span className={styles.certificateId}>{certificateId}</span>
+              <span className={styles.certificateId}>{hash}</span>
             </p>
           </div>
           <div className={styles.qrCode}>
