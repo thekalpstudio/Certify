@@ -114,7 +114,7 @@ export default function OwnershipChecker() {
   }
 
   const CertificateComponent =
-    getOrgId() === "26688ec0-f66a-46e1-a3d1-93469fdfecb6"
+    getOrgId() === "39533d21-d5d7-4977-bf8e-2b0f99a19465"
       ? CertificateDigitalSouth
       : CertificateDigitalSouthWithHindustanCollege;
 
