@@ -52,7 +52,7 @@ const MintSbt = () => {
         {
           name: userName,
           transactionHash: `${ExplorerLink}${transactionHash}`,
-          view_link: `${window.location.origin}/certificate/${network}/${recipientAddress}`,
+          view_link: `${window.location.origin}/certificate/${network}/${recipientAddress}/2`,
         },
         {
           userId: recipientAddress,

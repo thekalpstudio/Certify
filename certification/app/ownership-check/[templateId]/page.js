@@ -1,11 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
-import Navbar2 from "../components/Navbar/Navbar2";
-import Certificate from "../components/certificates/CertificateDigitalSouth/Certificate";
-import useSBTApi from "../../hooks/userSBT";
+import Navbar2 from "../../components/Navbar/Navbar2";
+import CertificateDigitalSouth from "../../components/certificates/CertificateDigitalSouth/Certificate";
+import CertificateDigitalSouthWithHindustanCollege from "../../components/certificates/CertificateDigitalSouthWithHindustanCollege";
+import useSBTApi from "../../../hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
+import { useParams } from "next/navigation";
 
 export default function OwnershipChecker() {
+  const { templateId } = useParams();
   const { getSBTByOwner } = useSBTApi();
   const { getSBTByOwner: getEVMSBTByOwner } = useEVMSBTApi();
   const [owner, setOwner] = useState("");
@@ -67,6 +70,11 @@ export default function OwnershipChecker() {
       setError("An error occurred while checking ownership.", err);
     }
   };
+
+  const CertificateComponent =
+    templateId === "2"
+      ? CertificateDigitalSouthWithHindustanCollege
+      : CertificateDigitalSouth;
 
   return (
     <div>
@@ -133,7 +141,7 @@ export default function OwnershipChecker() {
 
         {/* Ownership Details */}
         {ownership && (
-          <Certificate
+          <CertificateComponent
             title="College Degree"
             name={ownership.metadata.name || "Your Name"}
             date={ownership.metadata.dateOfIssue || "Date"}

@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import Certificate from "../../../components/certificates/CertificateDigitalSouth/Certificate";
-import useSBTApi from "../../../../hooks/userSBT";
+import CertificateDigitalSouth from "../../../../components/certificates/CertificateDigitalSouth/Certificate";
+import useSBTApi from "../../../../../hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
-import usePDFDownload from "../../../../hooks/usePDFDownload";
+import usePDFDownload from "../../../../../hooks/usePDFDownload";
+import CertificateDigitalSouthWithHindustanCollege from "../../../../components/certificates/CertificateDigitalSouthWithHindustanCollege";
 
 export default function OwnershipChecker() {
   const params = useParams();
@@ -75,6 +76,11 @@ export default function OwnershipChecker() {
     }
   };
 
+  const CertificateComponent =
+    params.templateId === "2"
+      ? CertificateDigitalSouthWithHindustanCollege
+      : CertificateDigitalSouth;
+
   return (
     <div>
       <main className="flex flex-col gap-8 justify-center min-h-screen bg-gradient-to-br items-center from-gray-50 to-indigo-50">
@@ -82,7 +88,7 @@ export default function OwnershipChecker() {
         {/* Certificate Container */}
         {ownership && (
           <div id="certificate-container">
-            <Certificate
+            <CertificateComponent
               title="College Degree"
               name={ownership.metadata.name || "Your Name"}
               date={ownership.metadata.dateOfIssue || "Date"}

@@ -115,13 +115,17 @@ const CertificateDigitalSouthWithHindustanCollege = ({
               <span className={styles.certificateId}>{certificateId}</span>
             </p>
           </div>
-          <div className={styles.qrContainer}>
+          <div className={styles.qrCode}>
             <img
               src={qrImage}
               alt="QR Code"
-              className={styles.qrCodeSmall}
+              style={{
+                width: "80px",
+                height: "80px",
+              }}
               onError={(e) => {
-                e.target.src = "/templates/template2/qrcode.png";
+                // If the fetched QR image fails to load, fall back to default
+                e.target.src = "/images/qr-code.png";
               }}
             />
           </div>

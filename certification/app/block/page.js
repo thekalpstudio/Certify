@@ -66,7 +66,7 @@ function GetStarted() {
               description="Enter to verify the authenticity and validity of the certificate"
               icon={Shield}
               options={verifyOptions}
-              path="/ownership-check"
+              path="/ownership-check/2"
             />
 
             <FeatureCard
