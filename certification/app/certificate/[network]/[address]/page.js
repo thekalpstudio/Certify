@@ -9,13 +9,20 @@ import CertificateDigitalSouthWithHindustanCollege from "../../../components/cer
 
 export default function OwnershipChecker() {
   const params = useParams();
-  const { getSBTByOwner } = useSBTApi();
-  const { getSBTByOwner: getEVMSBTByOwner } = useEVMSBTApi();
-  const { downloadPDF } = usePDFDownload();
   const [links, setLinks] = useState(null);
   const [ownership, setOwnership] = useState(null);
   const [error, setError] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
+  const [networkType, setNetworkType] = useState(null);
+
+  const { getSBTByOwner, isReady } = useSBTApi(networkType);
+  const { getSBTByOwner: getEVMSBTByOwner } = useEVMSBTApi();
+  const { downloadPDF } = usePDFDownload();
+
+  const getOrgId = () => {
+    const splitURL = links?.qr?.split("/");
+    return splitURL?.length ? splitURL[splitURL.length - 2] : null;
+  };
 
   const handleCheck = async (network, owner) => {
     setOwnership(null);
@@ -25,6 +32,7 @@ export default function OwnershipChecker() {
       if (network === "Holesky") {
         response = await getEVMSBTByOwner(owner);
       } else {
+        // Contract should already be ready at this point
         response = await getSBTByOwner(owner);
       }
       if (response.result.success) {
@@ -72,28 +80,61 @@ export default function OwnershipChecker() {
         // Check if the response has the expected structure
         if (data.links && data.links.profile && data.links.qr) {
           setLinks(data.links);
+
+          // Determine network type based on organization ID from the fetched links
+          const splitURL = data.links.qr.split("/");
+          const orgId = splitURL?.length ? splitURL[splitURL.length - 2] : null;
+          const determinedNetworkType =
+            orgId === "39533d21-d5d7-4977-bf8e-2b0f99a19465"
+              ? "TESTNET"
+              : "MAINNET";
+
+          console.log(
+            `Organization ID: ${orgId}, Using network: ${determinedNetworkType}`
+          );
+          setNetworkType(determinedNetworkType);
+
+          return { links: data.links, networkType: determinedNetworkType };
         } else {
           // If response doesn't have expected structure, fall back to defaults
           setLinks(null);
+          return { links: null, networkType: "TESTNET" };
         }
       }
+
+      return { links: null, networkType: "TESTNET" };
     } catch (error) {
       console.error("Failed to fetch links:", error);
+      return { links: null, networkType: "TESTNET" };
     }
   };
 
-  const getOrgId = () => {
-    const splitURL = links?.qr?.split("/");
-
-    return splitURL?.length ? splitURL[splitURL.length - 2] : null;
-  };
-
   useEffect(() => {
-    const network = params.network;
     const address = params.address;
 
-    handleCheck(network, address).then(() => fetchLinks(params.address));
-  }, []);
+    const initializeAndCheck = async () => {
+      const { links: fetchedLinks, networkType: fetchedNetworkType } =
+        await fetchLinks(address);
+
+      if (fetchedLinks) {
+        // Wait for the hook to be ready with the correct network type
+        // The useEffect will re-run when networkType changes and isReady becomes true
+        setNetworkType(fetchedNetworkType);
+      }
+    };
+
+    initializeAndCheck().catch((error) => {
+      console.error("Failed to initialize:", error);
+    });
+  }, []); // Only run once on mount
+
+  // Separate useEffect to handle certificate check when contract is ready
+  useEffect(() => {
+    if (isReady && links && networkType) {
+      const address = params.address;
+      handleCheck(params.network, address);
+    }
+  }, [isReady, links, networkType]); // Run when contract is ready and we have links
 
   const handleDownloadPDF = async () => {
     setIsDownloading(true);
@@ -109,8 +150,17 @@ export default function OwnershipChecker() {
     }
   };
 
-  if (!ownership || !links) {
-    return <div>Loading...</div>;
+  if (!ownership || !links || !isReady) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">
+            {!isReady ? "Initializing contract..." : "Loading certificate..."}
+          </p>
+        </div>
+      </div>
+    );
   }
 
   const CertificateComponent =
