@@ -1,0 +1,164 @@
+.certificateWrapper {
+  width: 1000px;
+  height: 700px;
+  background: url("/templates/template2/certificate_background.png") no-repeat
+    center center;
+  background-size: cover;
+  border: 10px solid #2a628f;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 300px;
+  position: relative;
+}
+
+.certificateHeader {
+  position: absolute;
+  top: 80px;
+  left: 70px;
+  display: flex;
+  color: #fff;
+}
+.easLogo {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+}
+
+.textArea {
+  padding: 20px 40px 20px 20px;
+  box-sizing: border-box;
+  color: #1b1b1b;
+  background-color: transparent;
+  position: relative;
+  margin-right: 20px;
+  text-align: justify;
+}
+
+.certificateTitle {
+  font-family: "Playfair Display", serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: #2a628f;
+  margin-top: 0;
+  margin-bottom: 22px;
+  line-height: 1.2;
+}
+
+.certificateTitle span {
+  font-weight: bold;
+  color: #000;
+}
+
+.introText {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.participantName {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2a628f;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 16px;
+}
+
+.certificateBody {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+}
+
+.infoWithQr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.infoLines {
+  flex: 1;
+  margin-right: 30px; /* Push content slightly away from QR */
+}
+
+.infoLine {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.infoLinetwo {
+  width: max-content;
+  display: flex;
+  font-size: 14px;
+  margin-bottom: 60px;
+}
+.certificateId {
+  display: block;
+  font-size: 14px;
+}
+
+.issueDate,
+.certificateId {
+  font-weight: bold;
+  color: #1b1b1b;
+}
+
+.qrContainer {
+  margin-left: -120px; /* Move QR code left by 5 spacing units */
+}
+.qrCode {
+  display: flex;
+  width: 150px;
+  justify-content: center;
+}
+
+.qrCodeSmall {
+  width: 80px;
+  height: 80px;
+  margin-left: -165px;
+  object-fit: contain;
+}
+
+.signatures {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.signatureBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.signatureBlock img.signature {
+  height: 60px;
+  object-fit: contain;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.signatureBlock p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.signatureBlock small {
+  font-size: 12px;
+  color: #333;
+}
+
+.uthiraSignatureBlock img.qrAbove {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 6px;
+}
