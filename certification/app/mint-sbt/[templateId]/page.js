@@ -25,13 +25,13 @@ const MintSbt = () => {
   const [network, setNetwork] = useState("Kalp");
   const [transactionHash, setTransactionHash] = useState("");
 
-  const CertificateComponent = () => {
+  const CertificateComponent = (props) => {
     if (templateId === "1") {
-      return <CertificateDigitalSouth />;
+      return <CertificateDigitalSouth {...props} />;
     } else if (templateId === "2") {
-      return <CertificateDigitalSouthWithHindustanCollege />;
+      return <CertificateDigitalSouthWithHindustanCollege {...props} />;
     } else if (templateId === "3") {
-      return <EthiopianAcademy />;
+      return <EthiopianAcademy {...props} />;
     }
   };
 
