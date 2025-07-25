@@ -97,10 +97,7 @@ const EthiopianAcademy = ({
             </p>
             <p className={styles.infoLinetwo}>
               <strong className={styles.certificateId}>Certificate ID:</strong>{" "}
-              <span className={styles.certificateId}>
-                {" "}
-                0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B
-              </span>
+              <span className={styles.certificateId}>{hash}</span>
             </p>
           </div>
           <div className={styles.qrCode}>
