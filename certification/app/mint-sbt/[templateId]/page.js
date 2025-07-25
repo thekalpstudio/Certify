@@ -9,6 +9,7 @@ import Link from "next/link";
 import CertificateDigitalSouth from "../../components/certificates/CertificateDigitalSouth/Certificate";
 import CertificateDigitalSouthWithHindustanCollege from "../../components/certificates/CertificateDigitalSouthWithHindustanCollege/index";
 import { useParams } from "next/navigation";
+import EthiopianAcademy from "../../components/certificates/EthiopianAcademy";
 
 const MintSbt = () => {
   const { templateId } = useParams();
@@ -24,10 +25,15 @@ const MintSbt = () => {
   const [network, setNetwork] = useState("Kalp");
   const [transactionHash, setTransactionHash] = useState("");
 
-  const CertificateComponent =
-    templateId === "2"
-      ? CertificateDigitalSouthWithHindustanCollege
-      : CertificateDigitalSouth;
+  const CertificateComponent = () => {
+    if (templateId === "1") {
+      return <CertificateDigitalSouth />;
+    } else if (templateId === "2") {
+      return <CertificateDigitalSouthWithHindustanCollege />;
+    } else if (templateId === "3") {
+      return <EthiopianAcademy />;
+    }
+  };
 
   const FIXED_WALLET =
     network === "Holesky"

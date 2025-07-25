@@ -18,6 +18,12 @@ const TEMPLATES = [
       "Digital South with Hindustan College of Arts and Science",
     templateImage: "/templates/template2.png",
   },
+  {
+    templateId: 3,
+    templateName: " Ethiopian Academy of Sciences",
+    templateDescription: " Ethiopian Academy of Sciences",
+    templateImage: "/templates/template3.png",
+  },
 ];
 
 const TemplateCard = ({ template }) => {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../certificate.css";
 import styles from "./Certificate.module.css";
+import Image from "next/image";
+import ESAlogo from "../../../../public/EAS-logo.png";
 
 const CertificateDigitalSouthWithHindustanCollege = ({
   name = "Mr. Parambir Singh",
@@ -61,7 +63,10 @@ const CertificateDigitalSouthWithHindustanCollege = ({
   return (
     <div className={styles.certificateWrapper}>
       <div className={styles.certificateHeader}>
-        <img src="/KS_Logo_white.png" alt="logo" width={150} />
+        <img src="/kalp-academy-white.svg" alt="logo" width={150} />
+      </div>
+      <div className={styles.easLogo}>
+        <Image src={ESAlogo} alt="logo" width={250} height={250} />
       </div>
       <div className={styles.textArea}>
         <h1 className={styles.certificateTitle}>
@@ -75,14 +80,13 @@ const CertificateDigitalSouthWithHindustanCollege = ({
         <div className={styles.participantName}>{name}</div>
 
         <p className={styles.certificateBody}>
-          has actively participated in the Guest Lecture on{" "}
-          <strong>
-            &ldquo;Web3 for Everyone: Exploring Opportunities Beyond Tech&rdquo;
-          </strong>
-          , organized by the Department of Commerce (General) Shift I, Hindustan
-          College of Arts & Science in association with Digital South Trust. The
-          session focused on emerging trends in Web3, blockchain, and
-          cryptocurrency in future finance.
+          has actively participated in the a half-day workshop on{" "}
+          <strong>&ldquo;Introduction to Blockchain&rdquo;</strong> held on 27th
+          June 2025, organized by the Kalp Academy in association with The
+          Ethiopian Academy of Sciences. The session provided participants with
+          a foundational understanding of blockchain technology and its
+          applications, including Web3 concepts and an overview of
+          cryptocurrency ecosystems.
         </p>
 
         <div className={styles.infoWithQr}>
@@ -101,8 +105,8 @@ const CertificateDigitalSouthWithHindustanCollege = ({
               src={qrImage}
               alt="QR Code"
               style={{
-                width: "80px",
-                height: "80px",
+                width: "100px",
+                height: "100px",
               }}
               onError={(e) => {
                 // If the fetched QR image fails to load, fall back to default
@@ -114,31 +118,15 @@ const CertificateDigitalSouthWithHindustanCollege = ({
 
         <div className={styles.signatures}>
           <div className={styles.signatureBlock}>
-            <img
-              src="/templates/template2/lalith_signature.png"
-              alt="Signature of Lalith Krishnan H"
-              className={styles.signature}
-              onError={(e) => {
-                e.target.src = "/lalith_signature.png";
-              }}
-            />
-            <p>Lalith Krishnan H</p>
-            <small>Director – Digital South Trust</small>
+            <p>Mrityunjaya Prajapati</p>
+            <small>Chief Executive Officer </small>
           </div>
 
           <div
             className={`${styles.signatureBlock} ${styles.uthiraSignatureBlock}`}
           >
-            <img
-              src="/templates/template2/uthira_signature.png.jpg"
-              alt="Signature of Dr. Uthira D"
-              className={styles.signature}
-              onError={(e) => {
-                e.target.src = "/sahana_signature.png";
-              }}
-            />
-            <p>Dr. Uthira D</p>
-            <small>Principal – HCAS</small>
+            <p>Prof. Teketel Yohannas</p>
+            <small>Executive Director</small>
           </div>
         </div>
       </div>

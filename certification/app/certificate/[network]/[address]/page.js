@@ -6,6 +6,7 @@ import useSBTApi from "../../../../hooks/userSBT";
 import useEVMSBTApi from "@/hooks/useEVMSBT";
 import usePDFDownload from "../../../../hooks/usePDFDownload";
 import CertificateDigitalSouthWithHindustanCollege from "../../../components/certificates/CertificateDigitalSouthWithHindustanCollege";
+import EthiopianAcademy from "../../../components/certificates/EthiopianAcademy";
 
 export default function OwnershipChecker() {
   const params = useParams();
@@ -163,10 +164,15 @@ export default function OwnershipChecker() {
     );
   }
 
-  const CertificateComponent =
-    getOrgId() === "39533d21-d5d7-4977-bf8e-2b0f99a19465"
-      ? CertificateDigitalSouth
-      : CertificateDigitalSouthWithHindustanCollege;
+  const CertificateComponent = () => {
+    if (getOrgId() === "39533d21-d5d7-4977-bf8e-2b0f99a19465") {
+      return <CertificateDigitalSouth />;
+    } else if (getOrgId() === "3f9554f4-04f5-478f-8302-977f57a48892") {
+      return <EthiopianAcademy />;
+    } else {
+      return <CertificateDigitalSouthWithHindustanCollege />;
+    }
+  };
 
   return (
     <div>
