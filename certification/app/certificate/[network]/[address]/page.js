@@ -164,13 +164,13 @@ export default function OwnershipChecker() {
     );
   }
 
-  const CertificateComponent = () => {
+  const CertificateComponent = (props) => {
     if (getOrgId() === "39533d21-d5d7-4977-bf8e-2b0f99a19465") {
-      return <CertificateDigitalSouth />;
+      return <CertificateDigitalSouth {...props} />;
     } else if (getOrgId() === "3f9554f4-04f5-478f-8302-977f57a48892") {
-      return <EthiopianAcademy />;
+      return <EthiopianAcademy {...props} />;
     } else {
-      return <CertificateDigitalSouthWithHindustanCollege />;
+      return <CertificateDigitalSouthWithHindustanCollege {...props} />;
     }
   };
 
