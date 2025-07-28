@@ -105,8 +105,8 @@ const EthiopianAcademy = ({
               src={qrImage}
               alt="QR Code"
               style={{
-                width: "140px",
-                height: "140px",
+                width: "80px",
+                height: "80px",
               }}
               onError={(e) => {
                 // If the fetched QR image fails to load, fall back to default
@@ -118,6 +118,7 @@ const EthiopianAcademy = ({
 
         <div className={styles.signatures}>
           <div className={styles.signatureBlock}>
+            <Image src="/mai-labs.png" width={100} height={50} alt="sign" />
             <p>Mrityunjaya Prajapati</p>
             <small>Chief Executive Officer </small>
             <small>Kalp Digital Infra Pvt. Ltd.</small>
@@ -126,6 +127,7 @@ const EthiopianAcademy = ({
           <div
             className={`${styles.signatureBlock} ${styles.uthiraSignatureBlock}`}
           >
+            <Image src="/teketel_sign.png" width={100} height={50} alt="sign" />
             <p>Prof. Teketel Yohannas</p>
             <small>Executive Director</small>
             <small>Ethiopian Academy of Sciences</small>

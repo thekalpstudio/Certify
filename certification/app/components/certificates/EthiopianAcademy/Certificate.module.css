@@ -75,7 +75,7 @@
 
 .infoWithQr {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 15px;
 }
@@ -93,7 +93,6 @@
   width: max-content;
   display: flex;
   font-size: 14px;
-  margin-bottom: 60px;
 }
 .certificateId {
   display: block;
@@ -134,7 +133,6 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 30px;
 }
 
 .signatureBlock img.signature {
@@ -150,6 +148,10 @@
   margin: 5px 0 0;
   font-size: 14px;
   font-weight: bold;
+}
+
+.signatureBlock img {
+  height: 40px;
 }
 
 .signatureBlock small {
